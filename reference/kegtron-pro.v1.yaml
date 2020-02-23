@@ -1,13 +1,8 @@
 openapi: 3.0.0
 info:
-  title: kegtron-pro
+  title: ktpro-api
   version: '1.0'
-  description: |-
-    Client REST API for Kegtron Pro Keg Monitors
-
-    Interactng with keg monitors ("devices") is a two-step process:
-    1) Call the /customer endpoint to obtain list of devices and respective keys
-    2) Read or write to an individual device using the /api/v2/device endpoints
+  description: Client REST API for Kegtron Pro Keg Monitors
   contact:
     email: info@kegtron.com
     name: Kegtron
