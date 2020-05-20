@@ -423,6 +423,7 @@ paths:
                                   type: string
               required:
                 - shadow
+        description: ''
       parameters:
         - schema:
             type: string
@@ -430,6 +431,7 @@ paths:
           in: header
           name: content-type
           required: true
+          description: ''
       description: "Update Device Shadow\n\nAny or or object keys parameters may be written to the device shadow. If the device is offline, any changes will be queued by the shadow and written to device when it is back online. "
     parameters: []
   /customer:
@@ -514,6 +516,104 @@ paths:
         - basic-auth: []
         - CUSTOMER_KEY: []
     parameters: []
+  /api/v2/m/device/rpc/Kegtron.ResetVolume:
+    post:
+      summary: Reset Volume RPC
+      operationId: post-api-v2-m-device-rpc-Kegtron.ResetVolume
+      responses:
+        '200':
+          description: 'true'
+      description: "This remote procedure call (RPC) initiates a keg volume reset on the target device for the specificed port. \n\nWhen called, the following shadow values are updated as shown:\n\n- config_readonly.porti.pulseCnt = 0\n- config_readonly.porti.volDisp = 0\n- config_readonly.porti.volStart = config.volSize\n- config_readonly.porti.dateTapped = current date"
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                port:
+                  type: integer
+                  maximum: 3
+              required:
+                - port
+        description: Port number 0..3 (corresponds to user port 1..4)
+  /api/v2/m/device/rpc/Kegtron.ResetKegsServed:
+    post:
+      summary: Reset Kegs Served RPC
+      operationId: post-api-v2-m-device-rpc-Kegtron.ResetKegsServed
+      responses:
+        '200':
+          description: 'true'
+      description: "This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specificed port. \n\nWhen called, the following shadow value is updated as shown:\n\n- config_readonly.porti.kegsServed = 0\n"
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                port:
+                  type: integer
+                  maximum: 3
+              required:
+                - port
+        description: Port number 0..3 (corresponds to user port 1..4)
+  /api/v2/m/device/rpc/Kegtron.UserOverride:
+    post:
+      summary: User Override RPC
+      operationId: post-api-v2-m-device-rpc-Kegtron.UserOverride
+      responses:
+        '200':
+          description: 'true'
+      description: |
+        This remote procedure call (RPC) initiates user-iniated overrides of specific shadow values on the target device for the specificed port. This method is used to prevent contention with firmware which can autonomously update these values.
+
+        The following values can be updated via this RPC:
+
+        - config_readonly.porti.dateTapped
+        - config_readonly.porti.dateCleaned
+        - config_readonly.porti.volStart
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                porti:
+                  type: object
+                  properties:
+                    dateTapped:
+                      type: string
+                    dateCleaned:
+                      type: string
+                    volStart:
+                      type: integer
+        description: "Replace 'i' with port number 0..3 (corresponds to user port 1..4)"
 components:
   schemas:
     port-config:
