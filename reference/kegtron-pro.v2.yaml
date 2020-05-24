@@ -518,7 +518,7 @@ paths:
     parameters: []
   /api/v2/m/device/rpc/Kegtron.ResetVolume:
     post:
-      summary: Reset Volume RPC
+      summary: Reset Volume RPC POST Endpoint
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetVolume
       responses:
         '200':
@@ -553,7 +553,7 @@ paths:
         description: Port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/rpc/Kegtron.ResetKegsServed:
     post:
-      summary: Reset Kegs Served RPC
+      summary: Reset Kegs Served RPC POST Endpoint
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetKegsServed
       responses:
         '200':
@@ -588,7 +588,7 @@ paths:
         description: Port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/rpc/Kegtron.UserOverride:
     post:
-      summary: User Override RPC
+      summary: User Override RPC POST Endpoint
       operationId: post-api-v2-m-device-rpc-Kegtron.UserOverride
       responses:
         '200':
