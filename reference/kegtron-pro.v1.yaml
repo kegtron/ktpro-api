@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ktpro-api
   version: '1.0'
-  description: Client REST API for Kegtron Pro Keg Monitors
+  description: "*** DEPRICATED -> REPLACED BY v2.x ***\n \nClient REST API for Kegtron Pro Keg Monitors\n\n"
   contact:
     email: info@kegtron.com
     name: Kegtron
