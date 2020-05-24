@@ -542,8 +542,14 @@ paths:
                 port:
                   type: integer
                   maximum: 3
+                  description: 'Port number, e.g. port0, port1...'
+                  minimum: 0
               required:
                 - port
+            examples:
+              Reset port 1 (user port 2):
+                value:
+                  port: 1
         description: Port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/rpc/Kegtron.ResetKegsServed:
     post:
@@ -571,8 +577,14 @@ paths:
                 port:
                   type: integer
                   maximum: 3
+                  description: 'Port number, e.g. port0, port1...'
+                  minimum: 0
               required:
                 - port
+            examples:
+              Reset Port 2 (user port 3):
+                value:
+                  port: 2
         description: Port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/rpc/Kegtron.UserOverride:
     post:
@@ -604,15 +616,38 @@ paths:
             schema:
               type: object
               properties:
-                porti:
+                state:
                   type: object
+                  required:
+                    - config_readonly
                   properties:
-                    dateTapped:
-                      type: string
-                    dateCleaned:
-                      type: string
-                    volStart:
-                      type: integer
+                    config_readonly:
+                      type: object
+                      required:
+                        - porti
+                      properties:
+                        porti:
+                          type: object
+                          description: 'Port number, e.g. port0, port1...'
+                          properties:
+                            dateTapped:
+                              type: string
+                              description: Date Format yyyy/mm/dd
+                            dateCleaned:
+                              type: string
+                              description: Date Format yyyy/mm/dd
+                            volStart:
+                              type: integer
+                              description: Keg starting volume in mL
+              required:
+                - state
+            examples:
+              Set Port 0 keg starting volume to 10L:
+                value:
+                  state:
+                    config_readonly:
+                      port0:
+                        volStart: 10000
         description: "Replace 'i' with port number 0..3 (corresponds to user port 1..4)"
 components:
   schemas:
