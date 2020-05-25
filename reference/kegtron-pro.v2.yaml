@@ -114,6 +114,7 @@ paths:
                             servingMs: 5000
                             siteName: "Moe's Tavern"
                             timezone: 'PST8PDT,M3.2.0,M11.1.0'
+                            timezoneLoc: America/Los_Angeles
                           config_readonly:
                             fwRev: 20200507
                             humidity: 66.5665
@@ -255,6 +256,7 @@ paths:
                             servingMs: 5000
                             siteName: "Moe's Tavern"
                             timezone: 'PST8PDT,M3.2.0,M11.1.0'
+                            timezoneLoc: America/Los_Angeles
                           config_readonly:
                             fwRev: 20200507
                             humidity: 67.0665
@@ -417,10 +419,16 @@ paths:
                                   $ref: '#/components/schemas/port-config'
                                 servingMs:
                                   type: integer
+                                  description: Time between servings in ms
                                 siteName:
                                   type: string
+                                  description: Site name
                                 timezone:
                                   type: string
+                                  description: Time Zone in GNU TZ format
+                                timezoneLoc:
+                                  type: string
+                                  description: Time Zone Location
               required:
                 - shadow
         description: ''
