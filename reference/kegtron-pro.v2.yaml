@@ -657,6 +657,39 @@ paths:
                       port0:
                         volStart: 10000
         description: "Replace 'i' with port number 0..3 (corresponds to user port 1..4)"
+  /api/v2/m/device/data/servings_range:
+    get:
+      summary: Servings Range GET Endpoint
+      operationId: get-api-v2-m-device-data-servings_range
+      responses:
+        '200':
+          description: OK
+      description: 'Query servings from database over a specified date-time range. '
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: Content-Type
+          required: true
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                params:
+                  type: array
+                  items: {}
+            examples:
+              Query servings for May 2020:
+                value:
+                  params:
+                    - '2020-05-01'
+                    - '2020-05-31'
+        description: ''
 components:
   schemas:
     port-config:
