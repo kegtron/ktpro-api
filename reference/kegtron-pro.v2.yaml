@@ -685,13 +685,19 @@ paths:
                   type: array
                   items: {}
             examples:
-              Query port 0 for May 2020:
+              'Query port 0 from May 1, 2020 until now':
                 value:
                   params:
                     - '0'
                     - '2020-05-01'
-                    - '2020-05-31'
-        description: ''
+                    - now
+        description: |-
+          "params" is an array with three keys:
+          * port number
+          * start datetime
+          * end datetime
+
+          'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
     parameters: []
   /api/v2/m/device/data/servings-device:
     get:
@@ -721,12 +727,17 @@ paths:
                   type: array
                   items: {}
             examples:
-              Query device for May 2020:
+              'Query device from May 1, 2020 until now':
                 value:
                   params:
                     - '2020-05-01'
-                    - '2020-05-31'
-        description: ''
+                    - now
+        description: |
+          "params" is an array with two keys:
+          * start datetime
+          * end datetime
+
+          'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
     parameters: []
 components:
   schemas:
