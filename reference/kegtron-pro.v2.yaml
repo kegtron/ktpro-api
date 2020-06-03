@@ -683,7 +683,13 @@ paths:
               properties:
                 params:
                   type: array
-                  items: {}
+                  minItems: 3
+                  maxItems: 3
+                  uniqueItems: false
+                  items:
+                    type: string
+              required:
+                - params
             examples:
               'Query port 0 from May 1, 2020 until now':
                 value:
@@ -725,7 +731,12 @@ paths:
               properties:
                 params:
                   type: array
-                  items: {}
+                  minItems: 2
+                  maxItems: 2
+                  items:
+                    type: string
+              required:
+                - params
             examples:
               'Query device from May 1, 2020 until now':
                 value:
