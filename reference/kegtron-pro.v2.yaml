@@ -750,6 +750,51 @@ paths:
 
           'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
     parameters: []
+  /api/v2/m/device/data/servings-all:
+    post:
+      summary: Servings-All POST Endpoint
+      operationId: post-api-v2-m-device-data-servings-all
+      responses:
+        '200':
+          description: OK
+      description: Query servings for all ports and devices assigned to the customer.
+      parameters:
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          required: true
+          description: ''
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                params:
+                  type: array
+                  minItems: 2
+                  maxItems: 2
+                  items:
+                    type: string
+              required:
+                - params
+            examples:
+              'Query all servings from May 1, 2020 until now':
+                value:
+                  params:
+                    - '2020-05-01'
+                    - now
+        description: |
+          "params" is an array with two keys:
+          * start datetime
+          * end datetime
+
+          'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
+    parameters: []
 components:
   schemas:
     port-config:
