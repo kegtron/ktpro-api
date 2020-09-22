@@ -69,7 +69,7 @@ paths:
                               state: 1
                               style: Malt Liquor
                               tapLabel: '1'
-                              userDesc: "Don't let the smooth taste fool ya"
+                              userDesc: Don't let the smooth taste fool ya
                               userName: King Cobra
                               volSize: 58670
                             port1:
@@ -112,7 +112,7 @@ paths:
                               userName: Olde English 800
                               volSize: 58670
                             servingMs: 5000
-                            siteName: "Moe's Tavern"
+                            siteName: Moe's Tavern
                             timezone: 'PST8PDT,M3.2.0,M11.1.0'
                             timezoneLoc: America/Los_Angeles
                           config_readonly:
@@ -254,7 +254,7 @@ paths:
                               userName: ''
                               volSize: 58670
                             servingMs: 5000
-                            siteName: "Moe's Tavern"
+                            siteName: Moe's Tavern
                             timezone: 'PST8PDT,M3.2.0,M11.1.0'
                             timezoneLoc: America/Los_Angeles
                           config_readonly:
@@ -316,7 +316,15 @@ paths:
           in: header
           name: content-type
           required: true
-      description: "Return Device Object\n\nCalling this endpoint returns all device state information from the device shadow. \n\nNOTE:\n- Device ports are numbered 0,1,2,3 which correspond to user port numbers 1,2,3,4\n- Four port objects will always be returned\n- If shadow.state.reported.config.portCount < 4, the upper port objects can be ignored"
+      description: |-
+        Return Device Object
+
+        Calling this endpoint returns all device state information from the device shadow. 
+
+        NOTE:
+        - Device ports are numbered 0,1,2,3 which correspond to user port numbers 1,2,3,4
+        - Four port objects will always be returned
+        - If shadow.state.reported.config.portCount < 4, the upper port objects can be ignored
     post:
       summary: Device POST Endpoint
       operationId: post-m-device
@@ -440,7 +448,10 @@ paths:
           name: content-type
           required: true
           description: ''
-      description: "Update Device Shadow\n\nAny or or object keys parameters may be written to the device shadow. If the device is offline, any changes will be queued by the shadow and written to device when it is back online. "
+      description: |-
+        Update Device Shadow
+
+        Any or or object keys parameters may be written to the device shadow. If the device is offline, any changes will be queued by the shadow and written to device when it is back online. 
     parameters: []
   /customer:
     get:
@@ -531,7 +542,15 @@ paths:
       responses:
         '200':
           description: 'true'
-      description: "This remote procedure call (RPC) initiates a keg volume reset on the target device for the specificed port. \n\nWhen called, the following shadow values are updated as shown:\n\n- config_readonly.porti.pulseCnt = 0\n- config_readonly.porti.volDisp = 0\n- config_readonly.porti.volStart = config.volSize\n- config_readonly.porti.dateTapped = current date"
+      description: |-
+        This remote procedure call (RPC) initiates a keg volume reset on the target device for the specificed port. 
+
+        When called, the following shadow values are updated as shown:
+
+        - config_readonly.porti.pulseCnt = 0
+        - config_readonly.porti.volDisp = 0
+        - config_readonly.porti.volStart = config.volSize
+        - config_readonly.porti.dateTapped = current date
       security:
         - DEVICE_PUBLIC_KEY: []
       parameters:
@@ -566,7 +585,12 @@ paths:
       responses:
         '200':
           description: 'true'
-      description: "This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specificed port. \n\nWhen called, the following shadow value is updated as shown:\n\n- config_readonly.porti.kegsServed = 0\n"
+      description: |
+        This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specificed port. 
+
+        When called, the following shadow value is updated as shown:
+
+        - config_readonly.porti.kegsServed = 0
       security:
         - DEVICE_PUBLIC_KEY: []
       parameters:
@@ -656,7 +680,7 @@ paths:
                     config_readonly:
                       port0:
                         volStart: 10000
-        description: "Replace 'i' with port number 0..3 (corresponds to user port 1..4)"
+        description: Replace 'i' with port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/data/servings-port:
     post:
       summary: Servings-Port POST Endpoint
@@ -750,51 +774,6 @@ paths:
 
           'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
     parameters: []
-  /api/v2/m/device/data/servings-all:
-    post:
-      summary: Servings-All POST Endpoint
-      operationId: post-api-v2-m-device-data-servings-all
-      responses:
-        '200':
-          description: OK
-      description: Query servings for all ports and devices assigned to the customer.
-      parameters:
-        - schema:
-            type: string
-            default: application/json
-          in: header
-          name: Content-Type
-          required: true
-          description: ''
-      security:
-        - DEVICE_PUBLIC_KEY: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                params:
-                  type: array
-                  minItems: 2
-                  maxItems: 2
-                  items:
-                    type: string
-              required:
-                - params
-            examples:
-              'Query all servings from May 1, 2020 until now':
-                value:
-                  params:
-                    - '2020-05-01'
-                    - now
-        description: |
-          "params" is an array with two keys:
-          * start datetime
-          * end datetime
-
-          'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
-    parameters: []
 components:
   schemas:
     port-config:
@@ -804,13 +783,13 @@ components:
       properties:
         abv:
           type: number
-          description: 'Alcohol By Volume value % rating'
+          description: Alcohol By Volume value % rating
         beaconEna:
           type: integer
           description: Enable flashing beacon for this port
         calOffset:
           type: number
-          description: 'Calibration offset %'
+          description: Calibration offset %
         userName:
           type: string
           description: User description of keg attached to this port
@@ -844,7 +823,7 @@ components:
       name: access_token
       type: apiKey
       in: query
-      description: "Insert valid 'DEVICE_PUBLIC_KEY'"
+      description: Insert valid 'DEVICE_PUBLIC_KEY'
     basic-auth:
       type: http
       scheme: basic
@@ -853,4 +832,4 @@ components:
       name: access_token
       type: apiKey
       in: query
-      description: "Insert valid 'CUSTOMER_KEY'"
+      description: Insert valid 'CUSTOMER_KEY'
