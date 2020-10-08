@@ -535,6 +535,50 @@ paths:
         - basic-auth: []
         - CUSTOMER_KEY: []
     parameters: []
+  /api/v2/m/device/rpc/Kegtron.GetTempHumidity:
+    post:
+      summary: Get Temperature and Humidity RPC POST Endpoint
+      operationId: post-api-v2-m-device-rpc-Kegtron.GetTempHumidity
+      responses:
+        '200':
+          description: 'true'
+          headers: {}
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  temp:
+                    type: number
+                    description: Device temperature in degrees Celsius
+                  humidity:
+                    type: number
+                    description: Device relative humdity percentage
+                required:
+                  - temp
+                  - humidity
+              examples:
+                Example:
+                  value:
+                    temp: 24.0311
+                    humidity: 56.849
+      description: |-
+        This remote procedure call (RPC) fetches the current temperature and humidity of the keg monitor device. It does not report temp/humdidity for specific ports.
+
+        When called, the following shadow values are updated:
+
+        - config_readonly.humidity
+        - config_readonly.temp
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
   /api/v2/m/device/rpc/Kegtron.ResetVolume:
     post:
       summary: Reset Volume RPC POST Endpoint
