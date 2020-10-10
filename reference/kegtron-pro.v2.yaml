@@ -579,6 +579,43 @@ paths:
           in: header
           name: content-type
           required: true
+  /api/v2/m/device/rpc/Kegtron.CleanMode:
+    post:
+      summary: Set Cleaning Mode RPC POST Endpoint
+      operationId: post-api-v2-m-device-rpc-Kegtron.CleanMode
+      responses:
+        '200':
+          description: 'true'
+      description: |-
+        This remote procedure call (RPC) configures the Cleaning Mode for the device.
+        - When enabled, measurements are ignored on all ports. Cleaning is enabled for a duration defined by config.cleaningDelay after which time it is automatically disabled.
+        - When disabled, all measurements behave normally
+
+        When called, the following shadow values are updated:
+
+        - config_readonly.cleanActive
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                mode:
+                  type: number
+                  description: '1: enabed, 0: disabled'
+              required:
+                - mode
+        description: Enable/disable cleaning mode using the 'mode' parameter
   /api/v2/m/device/rpc/Kegtron.ResetVolume:
     post:
       summary: Reset Volume RPC POST Endpoint
