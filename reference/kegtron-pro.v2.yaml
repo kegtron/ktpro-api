@@ -541,7 +541,7 @@ paths:
       operationId: post-api-v2-m-device-rpc-Kegtron.GetTempHumidity
       responses:
         '200':
-          description: 'true'
+          description: OK
           headers: {}
           content:
             application/json:
@@ -570,6 +570,30 @@ paths:
 
         - config_readonly.humidity
         - config_readonly.temp
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+  /api/v2/m/device/rpc/Kegtron.GetWiFiRssi:
+    post:
+      summary: Get WiFi RSSI RPC POST Endpoint
+      operationId: post-api-v2-m-device-rpc-Kegtron.GetWiFiRssi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+              examples:
+                Example:
+                  value: -47
+      description: This remote procedure call (RPC) fetches the current WiFi Recevied Signal Strength Indicator (RSSI) as seen by the device. Larger values correspond to stronger signal strength (e.g. -30 is very good whereas -80 is very poor).
       security:
         - DEVICE_PUBLIC_KEY: []
       parameters:
