@@ -20,7 +20,515 @@ paths:
           content:
             application/json:
               schema:
+                description: ''
                 type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                  shadow:
+                    type: object
+                    required:
+                      - state
+                    properties:
+                      state:
+                        type: object
+                        required:
+                          - reported
+                        properties:
+                          reported:
+                            type: object
+                            required:
+                              - config
+                              - config_readonly
+                              - online
+                              - ota
+                            properties:
+                              config:
+                                type: object
+                                required:
+                                  - afterHoursAlertEmailEna
+                                  - afterHoursAlertSmsEna
+                                  - alertEmail
+                                  - alertSmsToNumber
+                                  - autoCounterRstEna
+                                  - beaconEna
+                                  - bizHourFriDuration
+                                  - bizHourFriStart
+                                  - bizHourMonDuration
+                                  - bizHourMonStart
+                                  - bizHourSatDuration
+                                  - bizHourSatStart
+                                  - bizHourSunDuration
+                                  - bizHourSunStart
+                                  - bizHourThuDuration
+                                  - bizHourThuStart
+                                  - bizHourTueDuration
+                                  - bizHourTueStart
+                                  - bizHourWedDuration
+                                  - bizHourWedStart
+                                  - bleEna
+                                  - cleanDetectPeriodMs
+                                  - cleaningDelay
+                                  - displayUnits
+                                  - emptyThreshold
+                                  - emptyThresholdAlertEmailEna
+                                  - emptyThresholdAlertSmsEna
+                                  - humidityOffset
+                                  - lowThreshold
+                                  - lowThresholdAlertEmailEna
+                                  - lowThresholdAlertSmsEna
+                                  - port0
+                                  - port1
+                                  - secWiFiPass
+                                  - secWiFiSSID
+                                  - servingMs
+                                  - siteName
+                                  - tempOffset
+                                  - timezone
+                                  - timezoneLoc
+                                properties:
+                                  afterHoursAlertEmailEna:
+                                    type: number
+                                  afterHoursAlertSmsEna:
+                                    type: number
+                                  alertEmail:
+                                    type: string
+                                    minLength: 1
+                                  alertSmsToNumber:
+                                    type: string
+                                    minLength: 1
+                                  autoCounterRstEna:
+                                    type: number
+                                  beaconEna:
+                                    type: number
+                                  bizHourFriDuration:
+                                    type: number
+                                  bizHourFriStart:
+                                    type: string
+                                    minLength: 1
+                                  bizHourMonDuration:
+                                    type: number
+                                  bizHourMonStart:
+                                    type: string
+                                    minLength: 1
+                                  bizHourSatDuration:
+                                    type: number
+                                  bizHourSatStart:
+                                    type: string
+                                    minLength: 1
+                                  bizHourSunDuration:
+                                    type: number
+                                  bizHourSunStart:
+                                    type: string
+                                    minLength: 1
+                                  bizHourThuDuration:
+                                    type: number
+                                  bizHourThuStart:
+                                    type: string
+                                    minLength: 1
+                                  bizHourTueDuration:
+                                    type: number
+                                  bizHourTueStart:
+                                    type: string
+                                    minLength: 1
+                                  bizHourWedDuration:
+                                    type: number
+                                  bizHourWedStart:
+                                    type: string
+                                    minLength: 1
+                                  bleEna:
+                                    type: number
+                                  cleanDetectPeriodMs:
+                                    type: number
+                                  cleaningDelay:
+                                    type: number
+                                  displayUnits:
+                                    type: number
+                                  emptyThreshold:
+                                    type: number
+                                  emptyThresholdAlertEmailEna:
+                                    type: number
+                                  emptyThresholdAlertSmsEna:
+                                    type: number
+                                  humidityOffset:
+                                    type: number
+                                  lowThreshold:
+                                    type: number
+                                  lowThresholdAlertEmailEna:
+                                    type: number
+                                  lowThresholdAlertSmsEna:
+                                    type: number
+                                  port0:
+                                    type: object
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                      beaconEna:
+                                        type: number
+                                      calOffset:
+                                        type: number
+                                      drinkSize:
+                                        type: number
+                                      ibu:
+                                        type: number
+                                      maker:
+                                        type: string
+                                        minLength: 1
+                                      state:
+                                        type: number
+                                      style:
+                                        type: string
+                                        minLength: 1
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                      userDesc:
+                                        type: string
+                                        minLength: 1
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                      volSize:
+                                        type: number
+                                  port1:
+                                    type: object
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                      beaconEna:
+                                        type: number
+                                      calOffset:
+                                        type: number
+                                      drinkSize:
+                                        type: number
+                                      ibu:
+                                        type: number
+                                      maker:
+                                        type: string
+                                      state:
+                                        type: number
+                                      style:
+                                        type: string
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                      userDesc:
+                                        type: string
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                      volSize:
+                                        type: number
+                                  port2:
+                                    type: object
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                      beaconEna:
+                                        type: number
+                                      calOffset:
+                                        type: number
+                                      drinkSize:
+                                        type: number
+                                      ibu:
+                                        type: number
+                                      maker:
+                                        type: string
+                                      state:
+                                        type: number
+                                      style:
+                                        type: string
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                      userDesc:
+                                        type: string
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                      volSize:
+                                        type: number
+                                  port3:
+                                    type: object
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                      beaconEna:
+                                        type: number
+                                      calOffset:
+                                        type: number
+                                      drinkSize:
+                                        type: number
+                                      ibu:
+                                        type: number
+                                      maker:
+                                        type: string
+                                      state:
+                                        type: number
+                                      style:
+                                        type: string
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                      userDesc:
+                                        type: string
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                      volSize:
+                                        type: number
+                                  secWiFiPass:
+                                    type: string
+                                    minLength: 1
+                                  secWiFiSSID:
+                                    type: string
+                                    minLength: 1
+                                  servingMs:
+                                    type: number
+                                  siteName:
+                                    type: string
+                                    minLength: 1
+                                  tempOffset:
+                                    type: number
+                                  timezone:
+                                    type: string
+                                    minLength: 1
+                                  timezoneLoc:
+                                    type: string
+                                    minLength: 1
+                              config_readonly:
+                                type: object
+                                required:
+                                  - cleanActive
+                                  - connectedWiFiSSID
+                                  - fwRev
+                                  - humidity
+                                  - hwRev
+                                  - macAddr
+                                  - modelNum
+                                  - pcbRev
+                                  - port0
+                                  - port1
+                                  - port2
+                                  - port3
+                                  - portCount
+                                  - priWiFiPass
+                                  - priWiFiSSID
+                                  - serialNum
+                                  - temp
+                                properties:
+                                  cleanActive:
+                                    type: number
+                                  connectedWiFiSSID:
+                                    type: string
+                                    minLength: 1
+                                  fwRev:
+                                    type: number
+                                  humidity:
+                                    type: number
+                                  hwRev:
+                                    type: number
+                                  macAddr:
+                                    type: string
+                                    minLength: 1
+                                  modelNum:
+                                    type: string
+                                    minLength: 1
+                                  pcbRev:
+                                    type: number
+                                  port0:
+                                    type: object
+                                    required:
+                                      - dateCleaned
+                                      - dateTapped
+                                      - kFactor
+                                      - kegsServed
+                                      - lastServing
+                                      - pulseCnt
+                                      - volDisp
+                                      - volStart
+                                    properties:
+                                      dateCleaned:
+                                        type: string
+                                        minLength: 1
+                                      dateTapped:
+                                        type: string
+                                        minLength: 1
+                                      kFactor:
+                                        type: number
+                                      kegsServed:
+                                        type: number
+                                      lastServing:
+                                        type: number
+                                      pulseCnt:
+                                        type: number
+                                      volDisp:
+                                        type: number
+                                      volStart:
+                                        type: number
+                                  port1:
+                                    type: object
+                                    required:
+                                      - dateCleaned
+                                      - dateTapped
+                                      - kFactor
+                                      - kegsServed
+                                      - lastServing
+                                      - pulseCnt
+                                      - volDisp
+                                      - volStart
+                                    properties:
+                                      dateCleaned:
+                                        type: string
+                                      dateTapped:
+                                        type: string
+                                      kFactor:
+                                        type: number
+                                      kegsServed:
+                                        type: number
+                                      lastServing:
+                                        type: number
+                                      pulseCnt:
+                                        type: number
+                                      volDisp:
+                                        type: number
+                                      volStart:
+                                        type: number
+                                  port2:
+                                    type: object
+                                    required:
+                                      - dateCleaned
+                                      - dateTapped
+                                      - kFactor
+                                      - kegsServed
+                                      - lastServing
+                                      - pulseCnt
+                                      - volDisp
+                                      - volStart
+                                    properties:
+                                      dateCleaned:
+                                        type: string
+                                      dateTapped:
+                                        type: string
+                                      kFactor:
+                                        type: number
+                                      kegsServed:
+                                        type: number
+                                      lastServing:
+                                        type: number
+                                      pulseCnt:
+                                        type: number
+                                      volDisp:
+                                        type: number
+                                      volStart:
+                                        type: number
+                                  port3:
+                                    type: object
+                                    required:
+                                      - dateCleaned
+                                      - dateTapped
+                                      - kFactor
+                                      - kegsServed
+                                      - lastServing
+                                      - pulseCnt
+                                      - volDisp
+                                      - volStart
+                                    properties:
+                                      dateCleaned:
+                                        type: string
+                                      dateTapped:
+                                        type: string
+                                      kFactor:
+                                        type: number
+                                      kegsServed:
+                                        type: number
+                                      lastServing:
+                                        type: number
+                                      pulseCnt:
+                                        type: number
+                                      volDisp:
+                                        type: number
+                                      volStart:
+                                        type: number
+                                  portCount:
+                                    type: number
+                                  priWiFiPass:
+                                    type: string
+                                    minLength: 1
+                                  priWiFiSSID:
+                                    type: string
+                                    minLength: 1
+                                  serialNum:
+                                    type: string
+                                    minLength: 1
+                                  temp:
+                                    type: number
+                              online:
+                                type: boolean
+                              ota:
+                                type: object
+                                required:
+                                  - id
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                required:
+                  - id
+                  - shadow
               examples:
                 Example KT-420:
                   value:
@@ -51,11 +559,12 @@ paths:
                             bizHourWedStart: '08:00'
                             bleEna: 0
                             cleanDetectPeriodMs: 120000
-                            cleanEna: 0
+                            cleaningDelay: 90
                             displayUnits: 0
                             emptyThreshold: 10
                             emptyThresholdAlertEmailEna: 0
                             emptyThresholdAlertSmsEna: 0
+                            humidityOffset: 0
                             lowThreshold: 20
                             lowThresholdAlertEmailEna: 0
                             lowThresholdAlertSmsEna: 0
@@ -111,11 +620,16 @@ paths:
                               userDesc: The King of Malt Liquor
                               userName: Olde English 800
                               volSize: 58670
+                            secWiFiPass: backItUp
+                            secWiFiSSID: Backup WiFi
                             servingMs: 5000
                             siteName: Moe's Tavern
+                            tempOffset: 0
                             timezone: 'PST8PDT,M3.2.0,M11.1.0'
                             timezoneLoc: America/Los_Angeles
                           config_readonly:
+                            cleanActive: 0
+                            connectedWiFiSSID: Main WiFi
                             fwRev: 20200507
                             humidity: 66.5665
                             hwRev: 20200101
@@ -159,6 +673,8 @@ paths:
                               volDisp: 20481
                               volStart: 58670
                             portCount: 4
+                            priWiFiPass: mainStreet
+                            priWiFiSSID: Main WiFi
                             serialNum: '2001011234'
                             temp: 8.2346
                           online: true
@@ -193,11 +709,12 @@ paths:
                             bizHourWedStart: '08:00'
                             bleEna: 0
                             cleanDetectPeriodMs: 120000
-                            cleanEna: 0
+                            cleaningDelay: 90
                             displayUnits: 0
                             emptyThreshold: 10
                             emptyThresholdAlertEmailEna: 0
                             emptyThresholdAlertSmsEna: 0
+                            humidityOffset: 0
                             lowThreshold: 20
                             lowThresholdAlertEmailEna: 0
                             lowThresholdAlertSmsEna: 0
@@ -253,11 +770,16 @@ paths:
                               userDesc: ''
                               userName: ''
                               volSize: 58670
+                            secWifiPass: backItUp
+                            secWiFiSSID: Backup WiFi
                             servingMs: 5000
                             siteName: Moe's Tavern
+                            tempOffset: 0
                             timezone: 'PST8PDT,M3.2.0,M11.1.0'
                             timezoneLoc: America/Los_Angeles
                           config_readonly:
+                            cleanActive: 0
+                            connectedWiFiSSID: Main WiFi
                             fwRev: 20200507
                             humidity: 67.0665
                             hwRev: 20200101
@@ -301,6 +823,8 @@ paths:
                               volDisp: 0
                               volStart: 58670
                             portCount: 2
+                            priWiFiPass: mainStreet
+                            priWiFiSSID: Main WiFi
                             serialNum: '2001020345'
                             temp: 8.93477
                           online: true
@@ -403,14 +927,22 @@ paths:
                                   type: integer
                                 cleanEna:
                                   type: integer
+                                  deprecated: true
+                                cleaningDelay:
+                                  type: integer
+                                  description: Delay in minutes after which time cleaning mode will automatically be disabled
                                 displayUnits:
                                   type: integer
+                                  description: '0: Metric, 1: US Customary'
                                 emptyThreshold:
                                   type: integer
                                 emptyThresholdAlertEmailEna:
                                   type: integer
                                 emptyThresholdAlertSmsEna:
                                   type: integer
+                                humidityOffset:
+                                  type: number
+                                  description: Offset applied to all measurements
                                 lowThreshold:
                                   type: integer
                                 lowThresholdAlertEmailEna:
@@ -425,12 +957,21 @@ paths:
                                   $ref: '#/components/schemas/port-config'
                                 port3:
                                   $ref: '#/components/schemas/port-config'
+                                secWiFiPass:
+                                  type: string
+                                  description: Secondary WiFi password
+                                secWiFiSSID:
+                                  type: string
+                                  description: Secondary WiFi SSID
                                 servingMs:
                                   type: integer
                                   description: Time between servings in ms
                                 siteName:
                                   type: string
                                   description: Site name
+                                tempOffset:
+                                  type: number
+                                  description: Offset applied to all measurements
                                 timezone:
                                   type: string
                                   description: Time Zone in GNU TZ format
