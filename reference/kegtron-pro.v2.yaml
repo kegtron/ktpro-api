@@ -12,7 +12,7 @@ servers:
 paths:
   /api/v2/m/device:
     get:
-      summary: Device GET Endpoint
+      summary: Device GET
       tags: []
       responses:
         '200':
@@ -326,7 +326,7 @@ paths:
         - Four port objects will always be returned
         - If shadow.state.reported.config.portCount < 4, the upper port objects can be ignored
     post:
-      summary: Device POST Endpoint
+      summary: Device POST
       operationId: post-m-device
       responses:
         '200':
@@ -455,7 +455,7 @@ paths:
     parameters: []
   /customer:
     get:
-      summary: Customer GET Endpoint
+      summary: Customer GET
       tags: []
       responses:
         '200':
@@ -537,7 +537,7 @@ paths:
     parameters: []
   /api/v2/m/device/rpc/Kegtron.GetTempHumidity:
     post:
-      summary: Get Temperature and Humidity RPC POST Endpoint
+      summary: Get Temperature and Humidity RPC POST
       operationId: post-api-v2-m-device-rpc-Kegtron.GetTempHumidity
       responses:
         '200':
@@ -581,7 +581,7 @@ paths:
           required: true
   /api/v2/m/device/rpc/Kegtron.GetWiFiRssi:
     post:
-      summary: Get WiFi RSSI RPC POST Endpoint
+      summary: Get WiFi RSSI RPC POST
       operationId: post-api-v2-m-device-rpc-Kegtron.GetWiFiRssi
       responses:
         '200':
@@ -605,7 +605,7 @@ paths:
           required: true
   /api/v2/m/device/rpc/Kegtron.CleanMode:
     post:
-      summary: Set Cleaning Mode RPC POST Endpoint
+      summary: Set Cleaning Mode RPC POST
       operationId: post-api-v2-m-device-rpc-Kegtron.CleanMode
       responses:
         '200':
@@ -642,7 +642,7 @@ paths:
         description: Enable/disable cleaning mode using the 'mode' parameter
   /api/v2/m/device/rpc/Kegtron.ResetVolume:
     post:
-      summary: Reset Volume RPC POST Endpoint
+      summary: Reset Volume RPC POST
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetVolume
       responses:
         '200':
@@ -685,7 +685,7 @@ paths:
         description: Port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/rpc/Kegtron.ResetKegsServed:
     post:
-      summary: Reset Kegs Served RPC POST Endpoint
+      summary: Reset Kegs Served RPC POST
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetKegsServed
       responses:
         '200':
@@ -725,7 +725,7 @@ paths:
         description: Port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/rpc/Kegtron.UserOverride:
     post:
-      summary: User Override RPC POST Endpoint
+      summary: User Override RPC POST
       operationId: post-api-v2-m-device-rpc-Kegtron.UserOverride
       responses:
         '200':
@@ -788,7 +788,7 @@ paths:
         description: Replace 'i' with port number 0..3 (corresponds to user port 1..4)
   /api/v2/m/device/data/telemetry-device:
     post:
-      summary: Telemetry-Device POST Endpoint
+      summary: Telemetry-Device POST
       operationId: post-api-v2-m-device-data-telemetry-device
       responses:
         '200':
@@ -833,7 +833,7 @@ paths:
     parameters: []
   /api/v2/m/device/data/alerts-port:
     post:
-      summary: Alerts-Port POST Endpoint
+      summary: Alerts-Port POST
       operationId: post-api-v2-m-device-data-alerts-port
       responses:
         '200':
@@ -880,7 +880,7 @@ paths:
     parameters: []
   /api/v2/m/device/data/alerts-device:
     post:
-      summary: Alerts-Device POST Endpoint
+      summary: Alerts-Device POST
       operationId: post-api-v2-m-device-data-alerts-device
       responses:
         '200':
@@ -925,7 +925,7 @@ paths:
     parameters: []
   /api/v2/m/device/data/servings-port:
     post:
-      summary: Servings-Port POST Endpoint
+      summary: Servings-Port POST
       operationId: post-api-v2-m-device-data-servings-port
       responses:
         '200':
@@ -973,7 +973,7 @@ paths:
     parameters: []
   /api/v2/m/device/data/servings-device:
     post:
-      summary: Servings-Device POST Endpoint
+      summary: Servings-Device POST
       operationId: post-api-v2-m-device-data-servings-device
       responses:
         '200':
