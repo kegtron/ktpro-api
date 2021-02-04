@@ -6,9 +6,12 @@ info:
   contact:
     email: info@kegtron.com
     name: Kegtron
-    url: www.kegtron.com
+    url: kegtron.com
 servers:
   - url: 'https://mdash.net'
+    description: HTTPS
+  - url: 'wss://mdash.net'
+    description: WebSocket Secure
 paths:
   /api/v2/m/device:
     get:
@@ -1616,3 +1619,12 @@ components:
       type: apiKey
       in: query
       description: Insert valid 'CUSTOMER_KEY'
+  examples:
+    notify:
+      value:
+        description: Device Notifications
+        type: WebSocket
+        url: 'wss://mdash.net/api/v2/m/device/notify?access_token=<DEVICE_PUBLIC_KEY>'
+        notes:
+          - 'When a WebSocket connection is established for a specific device, real-time device updates are sent via a JSON object'
+          - See /api/v2/m/device GET endpoint for object examples
