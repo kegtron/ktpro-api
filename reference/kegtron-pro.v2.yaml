@@ -1078,6 +1078,46 @@ paths:
         - basic-auth: []
         - CUSTOMER_KEY: []
     parameters: []
+    post:
+      summary: Customer POST
+      operationId: post-customer
+      responses:
+        '200':
+          description: OK
+      description: This endpoint allows modification of the Customer object metadata with account-specific info. All other keys within the Customer object are read-only.
+      security:
+        - CUSTOMER_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                cconfig:
+                  type: object
+                  description: Customer metadata object
+                  properties:
+                    bizDayStart:
+                      type: string
+                      description: 'Business day start time as a "HH:MM" string representing time in 24 hour format'
+                      format: time
+                      default: '08:00'
+              required:
+                - cconfig
+            examples:
+              'Set start of biz day to 10:00am':
+                value:
+                  cconfig:
+                    bizDayStart: '10:00'
+        description: ''
   /api/v2/m/device/rpc/Kegtron.GetTempHumidity:
     post:
       summary: Get Temperature and Humidity RPC POST
