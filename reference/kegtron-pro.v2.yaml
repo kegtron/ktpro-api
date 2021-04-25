@@ -1019,19 +1019,22 @@ paths:
                     properties:
                       key1:
                         description: Device 1 public key
+                        type:
+                          - string
                         nullable: true
-                        type: string
                       key2:
                         description: Device 2 public key
+                        type:
+                          - string
                         nullable: true
-                        type: string
                       keyn:
                         description: Device n public key
+                        type:
+                          - string
                         nullable: true
-                        type: string
                   token:
                     type: string
-                    description: Customer token
+                    description: CUSTOMER_KEY
                   email:
                     type: string
                     description: Customer email address
