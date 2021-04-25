@@ -9,9 +9,6 @@ info:
     url: kegtron.com
 servers:
   - url: 'https://mdash.net'
-    description: HTTPS
-  - url: 'wss://mdash.net'
-    description: WebSocket Secure
 paths:
   /api/v2/m/device:
     get:
