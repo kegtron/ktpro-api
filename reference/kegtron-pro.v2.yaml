@@ -1072,9 +1072,11 @@ paths:
 
         This endpoint can be called in two different ways:
         1) Use basic auth with username:password
-        2) Use the CUSTOMER_KEY as the access_token
+        2) Use the CUSTOMER_KEY* as the access_token
 
         Both methods return an identical customer object.
+
+        * If you don't have the CUSTOMER_KEY, use method #1 (basic auth) to obtain the customer object. The 'token' value within this object is the CUSTOMER_KEY.
       security:
         - basic-auth: []
         - CUSTOMER_KEY: []
