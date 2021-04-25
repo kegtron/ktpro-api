@@ -1107,8 +1107,7 @@ paths:
                   properties:
                     bizDayStart:
                       type: string
-                      description: 'Business day start time as a "HH:MM" string representing time in 24 hour format'
-                      format: time
+                      description: 'Business day start time string in "HH:MM" 24 hour format'
                       default: '08:00'
               required:
                 - cconfig
