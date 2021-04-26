@@ -1115,7 +1115,7 @@ paths:
               required:
                 - cconfig
             examples:
-              'Set start of biz day to 10:00am':
+              Example:
                 value:
                   cconfig:
                     bizDayStart: '10:00'
