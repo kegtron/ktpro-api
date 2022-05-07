@@ -672,6 +672,7 @@ paths:
                                   id:
                                     type: string
                                     minLength: 1
+                                    description: Over The Air (OTA) update ID
                 required:
                   - id
                   - shadow

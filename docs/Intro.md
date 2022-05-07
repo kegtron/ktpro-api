@@ -9,7 +9,8 @@ Kegtron Pro uses a REST API to interact with keg monitor hardware ("devices")
 
 #### Device Notifications
 - Enable WebSockets to get live push notifications of device updates
-- See the Example tab to the left
+- See the Notifications tab to the left
 
 #### Endpoint details can be found by clicking the tab to the left
-- Be sure to check out the "Try It" tab to excercise the API from your browser and/or generate sample code 
+- You can excercise API endpoints directly from your browser. Click on the desired endpoint, enter a valide access_token (e.g. device or customer key) and click "Send API Request"
+- Generate sample code from the endpoint details page 
