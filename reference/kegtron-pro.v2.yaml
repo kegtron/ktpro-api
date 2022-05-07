@@ -46,6 +46,7 @@ paths:
                             properties:
                               config:
                                 type: object
+                                description: Read/write configuration keys
                                 required:
                                   - afterHoursAlertEmailEna
                                   - afterHoursAlertSmsEna
@@ -89,7 +90,6 @@ paths:
                                   - tempOffset
                                   - timezone
                                   - timezoneLoc
-                                description: Read/write configuration keys
                                 properties:
                                   afterHoursAlertEmailEna:
                                     type: integer
@@ -645,9 +645,6 @@ paths:
                                   portCount:
                                     type: integer
                                     description: Keg monitor port count
-                                    minimum: 2
-                                    maximum: 4
-                                    multipleOf: 2
                                     readOnly: true
                                   priWiFiPass:
                                     type: string
