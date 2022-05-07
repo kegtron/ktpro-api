@@ -204,6 +204,8 @@ paths:
                                         minLength: 1
                                       volSize:
                                         type: number
+                                      '':
+                                        type: string
                                   port1:
                                     type: object
                                     required:
@@ -248,19 +250,6 @@ paths:
                                         type: number
                                   port2:
                                     type: object
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
                                     properties:
                                       abv:
                                         type: number
@@ -288,21 +277,21 @@ paths:
                                         minLength: 1
                                       volSize:
                                         type: number
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
                                   port3:
                                     type: object
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
                                     properties:
                                       abv:
                                         type: number
@@ -330,6 +319,19 @@ paths:
                                         minLength: 1
                                       volSize:
                                         type: number
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
                                   secWiFiPass:
                                     type: string
                                     minLength: 1
@@ -411,14 +413,19 @@ paths:
                                         type: number
                                       kegsServed:
                                         type: number
+                                        description: 'Number of kegs served '
                                       lastServing:
                                         type: number
+                                        description: Volume of most recent serving (mL)
                                       pulseCnt:
                                         type: number
+                                        description: Pulse count from flow meter since last keg volume reset.
                                       volDisp:
                                         type: number
+                                        description: Volume dispensed (mL) from keg since last keg volume reset
                                       volStart:
                                         type: number
+                                        description: Starting fill volume (mL) of keg when tapped
                                   port1:
                                     type: object
                                     required:
