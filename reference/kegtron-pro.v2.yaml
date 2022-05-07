@@ -71,15 +71,17 @@ paths:
                                   - cleanDetectPeriodMs
                                   - cleaningDelay
                                   - displayUnits
-                                  - emptyThreshold
                                   - emptyThresholdAlertEmailEna
                                   - emptyThresholdAlertSmsEna
+                                  - emptyThreshold
                                   - humidityOffset
                                   - lowThreshold
                                   - lowThresholdAlertEmailEna
                                   - lowThresholdAlertSmsEna
                                   - port0
                                   - port1
+                                  - port2
+                                  - port3
                                   - secWiFiPass
                                   - secWiFiSSID
                                   - servingMs
@@ -87,6 +89,7 @@ paths:
                                   - tempOffset
                                   - timezone
                                   - timezoneLoc
+                                description: Read/write configuration keys
                                 properties:
                                   afterHoursAlertEmailEna:
                                     type: integer
@@ -169,24 +172,30 @@ paths:
                                   displayUnits:
                                     type: integer
                                     description: 'Display units: 0 = metric, 1 = US Customary'
+                                  emptyThresholdAlertEmailEna:
+                                    type: integer
+                                    description: Enable keg level empty threshold email alerts
+                                  emptyThresholdAlertSmsEna:
+                                    type: number
+                                    description: Enable keg level empty threshold SMS alerts
                                   emptyThreshold:
                                     type: number
                                     description: Empty alert threshold keg level percentage
-                                  emptyThresholdAlertEmailEna:
-                                    type: number
-                                  emptyThresholdAlertSmsEna:
-                                    type: number
                                   humidityOffset:
                                     type: number
+                                    description: 'Humidity offset. This value is added to the raw sensor value to calculate  config_readonly.humidity '
                                   lowThreshold:
                                     type: number
                                     description: Low alert threshold keg level percentage
                                   lowThresholdAlertEmailEna:
                                     type: number
+                                    description: Enable keg level low threshold email alerts
                                   lowThresholdAlertSmsEna:
                                     type: number
+                                    description: Enable keg level low threshold SMS alerts
                                   port0:
                                     type: object
+                                    description: Logical port 0 / user port 1
                                     required:
                                       - abv
                                       - beaconEna
@@ -203,148 +212,46 @@ paths:
                                     properties:
                                       abv:
                                         type: number
+                                        description: Alcohol by volume (%)
                                       beaconEna:
-                                        type: number
+                                        type: integer
+                                        description: Port beacon enable
                                       calOffset:
                                         type: number
+                                        description: Calibration offset correction (%) applied to each serving
                                       drinkSize:
                                         type: number
-                                      ibu:
-                                        type: number
-                                      maker:
-                                        type: string
-                                        minLength: 1
-                                      state:
-                                        type: number
-                                      style:
-                                        type: string
-                                        minLength: 1
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                      userDesc:
-                                        type: string
-                                        minLength: 1
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                      volSize:
-                                        type: number
-                                      '':
-                                        type: string
-                                  port1:
-                                    type: object
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
-                                    properties:
-                                      abv:
-                                        type: number
-                                      beaconEna:
-                                        type: number
-                                      calOffset:
-                                        type: number
-                                      drinkSize:
-                                        type: number
-                                      ibu:
-                                        type: number
-                                      maker:
-                                        type: string
-                                      state:
-                                        type: number
-                                      style:
-                                        type: string
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                      userDesc:
-                                        type: string
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                      volSize:
-                                        type: number
-                                  port2:
-                                    type: object
-                                    properties:
-                                      abv:
-                                        type: number
-                                      beaconEna:
-                                        type: number
-                                      calOffset:
-                                        type: number
-                                      drinkSize:
-                                        type: number
-                                      ibu:
-                                        type: number
-                                      maker:
-                                        type: string
-                                      state:
-                                        type: number
-                                      style:
-                                        type: string
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                      userDesc:
-                                        type: string
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                      volSize:
-                                        type: number
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
-                                  port3:
-                                    type: object
-                                    properties:
-                                      abv:
-                                        type: number
-                                      beaconEna:
-                                        type: number
-                                      calOffset:
-                                        type: number
-                                      drinkSize:
-                                        type: number
+                                        description: Default serving size volume (mL) use to estimate remaining servings
                                       ibu:
                                         type: integer
+                                        description: 'International Bitterness Units '
                                       maker:
                                         type: string
+                                        description: Maker/Producer of bevergage
                                       state:
                                         type: number
+                                        description: 'Port state: 1 = enabled, 0 = disabled'
                                       style:
                                         type: string
+                                        description: Beverage style
                                       tapLabel:
                                         type: string
                                         minLength: 1
+                                        description: Tap handle label (usually a number)
+                                        maxLength: 6
                                       userDesc:
                                         type: string
+                                        description: Kegged beverage description
                                       userName:
                                         type: string
                                         minLength: 1
+                                        description: Kegged beverage name
                                       volSize:
-                                        type: number
+                                        type: integer
+                                        description: Keg size volume (mL)
+                                  port1:
+                                    type: object
+                                    description: Logical port 1 / user port 2
                                     required:
                                       - abv
                                       - beaconEna
@@ -358,27 +265,189 @@ paths:
                                       - userDesc
                                       - userName
                                       - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                        description: Alcohol by volume (%)
+                                      beaconEna:
+                                        type: integer
+                                        description: Port beacon enable
+                                      calOffset:
+                                        type: number
+                                        description: Calibration offset correction (%) applied to each serving
+                                      drinkSize:
+                                        type: number
+                                        description: Default serving size volume (mL) use to estimate remaining servings
+                                      ibu:
+                                        type: integer
+                                        description: 'International Bitterness Units '
+                                      maker:
+                                        type: string
+                                        description: Maker/Producer of bevergage
+                                      state:
+                                        type: number
+                                        description: 'Port state: 1 = enabled, 0 = disabled'
+                                      style:
+                                        type: string
+                                        description: Beverage style
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                        description: Tap handle label (usually a number)
+                                        maxLength: 6
+                                      userDesc:
+                                        type: string
+                                        description: Kegged beverage description
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                        description: Kegged beverage name
+                                      volSize:
+                                        type: integer
+                                        description: Keg size volume (mL)
+                                  port2:
+                                    type: object
+                                    description: Logical port 2 / user port 3
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                        description: Alcohol by volume (%)
+                                      beaconEna:
+                                        type: integer
+                                        description: Port beacon enable
+                                      calOffset:
+                                        type: number
+                                        description: Calibration offset correction (%) applied to each serving
+                                      drinkSize:
+                                        type: number
+                                        description: Default serving size volume (mL) use to estimate remaining servings
+                                      ibu:
+                                        type: integer
+                                        description: 'International Bitterness Units '
+                                      maker:
+                                        type: string
+                                        description: Maker/Producer of bevergage
+                                      state:
+                                        type: number
+                                        description: 'Port state: 1 = enabled, 0 = disabled'
+                                      style:
+                                        type: string
+                                        description: Beverage style
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                        description: Tap handle label (usually a number)
+                                        maxLength: 6
+                                      userDesc:
+                                        type: string
+                                        description: Kegged beverage description
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                        description: Kegged beverage name
+                                      volSize:
+                                        type: integer
+                                        description: Keg size volume (mL)
+                                  port3:
+                                    type: object
+                                    description: Logical port 3 / user port 4
+                                    required:
+                                      - abv
+                                      - beaconEna
+                                      - calOffset
+                                      - drinkSize
+                                      - ibu
+                                      - maker
+                                      - state
+                                      - style
+                                      - tapLabel
+                                      - userDesc
+                                      - userName
+                                      - volSize
+                                    properties:
+                                      abv:
+                                        type: number
+                                        description: Alcohol by volume (%)
+                                      beaconEna:
+                                        type: integer
+                                        description: Port beacon enable
+                                      calOffset:
+                                        type: number
+                                        description: Calibration offset correction (%) applied to each serving
+                                      drinkSize:
+                                        type: number
+                                        description: Default serving size volume (mL) use to estimate remaining servings
+                                      ibu:
+                                        type: integer
+                                        description: 'International Bitterness Units '
+                                      maker:
+                                        type: string
+                                        description: Maker/Producer of bevergage
+                                      state:
+                                        type: number
+                                        description: 'Port state: 1 = enabled, 0 = disabled'
+                                      style:
+                                        type: string
+                                        description: Beverage style
+                                      tapLabel:
+                                        type: string
+                                        minLength: 1
+                                        description: Tap handle label (usually a number)
+                                        maxLength: 6
+                                      userDesc:
+                                        type: string
+                                        description: Kegged beverage description
+                                      userName:
+                                        type: string
+                                        minLength: 1
+                                        description: Kegged beverage name
+                                      volSize:
+                                        type: integer
+                                        description: Keg size volume (mL)
                                   secWiFiPass:
                                     type: string
                                     minLength: 1
+                                    description: Password of secondary WiFi
                                   secWiFiSSID:
                                     type: string
                                     minLength: 1
+                                    description: SSID of secondary WiFi
                                   servingMs:
-                                    type: number
+                                    type: integer
+                                    description: Time between servings in ms
                                   siteName:
                                     type: string
                                     minLength: 1
+                                    description: Site name
                                   tempOffset:
                                     type: number
+                                    description: 'Temperature offset. This value is added to the raw sensor value to calculate  config_readonly.temp '
                                   timezone:
                                     type: string
                                     minLength: 1
+                                    description: 'Time zone in GNU tz format. See https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html '
+                                    example: 'PST8PDT,M3.2.0,M11.1.0'
                                   timezoneLoc:
                                     type: string
                                     minLength: 1
+                                    description: 'Time zone location. See https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv for valid list'
+                                    example: America/Los_Angeles
                               config_readonly:
                                 type: object
+                                description: Read-only configuration/status keys
                                 required:
                                   - cleanActive
                                   - connectedWiFiSSID
@@ -399,26 +468,35 @@ paths:
                                   - temp
                                 properties:
                                   cleanActive:
-                                    type: number
+                                    type: integer
+                                    description: 'Cleaning cycle active status '
                                   connectedWiFiSSID:
                                     type: string
                                     minLength: 1
+                                    description: SSID of currently connected WiFi network
                                   fwRev:
-                                    type: number
+                                    type: integer
+                                    description: Firmware revision
                                   humidity:
                                     type: number
+                                    description: Ambient relative humidity (%) from most recent reading
                                   hwRev:
-                                    type: number
+                                    type: integer
+                                    description: Hardware revision
                                   macAddr:
                                     type: string
                                     minLength: 1
+                                    description: MAC address
                                   modelNum:
                                     type: string
                                     minLength: 1
+                                    description: Model number
                                   pcbRev:
-                                    type: number
+                                    type: integer
+                                    description: PCB revision
                                   port0:
                                     type: object
+                                    description: Logical port 0 / user port 1
                                     required:
                                       - dateCleaned
                                       - dateTapped
@@ -455,6 +533,7 @@ paths:
                                         description: Starting fill volume (mL) of keg when tapped
                                   port1:
                                     type: object
+                                    description: Logical port 1 / user port 2
                                     required:
                                       - dateCleaned
                                       - dateTapped
@@ -491,6 +570,7 @@ paths:
                                         description: Starting fill volume (mL) of keg when tapped
                                   port2:
                                     type: object
+                                    description: Logical port 2 / user port 3
                                     required:
                                       - dateCleaned
                                       - dateTapped
@@ -527,6 +607,7 @@ paths:
                                         description: Starting fill volume (mL) of keg when tapped
                                   port3:
                                     type: object
+                                    description: Logical port 3 / user port 4
                                     required:
                                       - dateCleaned
                                       - dateTapped
@@ -563,19 +644,29 @@ paths:
                                         description: Starting fill volume (mL) of keg when tapped
                                   portCount:
                                     type: integer
+                                    description: Keg monitor port count
+                                    minimum: 2
+                                    maximum: 4
+                                    multipleOf: 2
+                                    readOnly: true
                                   priWiFiPass:
                                     type: string
                                     minLength: 1
+                                    description: Password for primary WiFi
                                   priWiFiSSID:
                                     type: string
                                     minLength: 1
+                                    description: SSID for primary WiFi
                                   serialNum:
                                     type: string
                                     minLength: 1
+                                    description: Device serial number
                                   temp:
                                     type: number
+                                    description: Ambient air temperature (deg C) from last reading
                               online:
                                 type: boolean
+                                description: Cloud connection status
                               ota:
                                 type: object
                                 required:
