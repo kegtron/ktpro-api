@@ -1363,15 +1363,26 @@ paths:
         content:
           application/json:
             schema:
-              description: ''
               type: object
               properties:
                 mode:
-                  type: number
+                  type: integer
                   description: '1: enabed, 0: disabled'
+                  minimum: 0
+                  maximum: 1
+                port:
+                  type: integer
+                  minimum: 0
+                  maximum: 3
+                  description: 'Logical port number: 0,1,2,3'
               required:
                 - mode
-        description: Enable/disable cleaning mode using the 'mode' parameter
+            examples:
+              Enable cleaning on port 3:
+                value:
+                  mode: 1
+                  port: 3
+        description: 'Enable/disable cleaning mode. '
   /api/v2/m/device/rpc/Kegtron.ResetVolume:
     post:
       summary: Reset Volume RPC POST
