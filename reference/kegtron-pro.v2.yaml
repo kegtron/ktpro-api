@@ -1759,6 +1759,45 @@ paths:
 
           'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
     parameters: []
+  /api/v2/m/device/rpc/Kegtron.ManServUpdate:
+    post:
+      summary: Manual Serving Update
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: post-api-v2-m-device-rpc-Kegtron.ManServUpdate
+      description: This remote procedure call (RPC) manually adds an entry to the 'servings' database table. Servings can be positive or negative values. A negative value may be used to 'undo' an existing serving that was recorded by mistake.
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                port:
+                  type: integer
+                  x-stoplight:
+                    id: nbtb3zy0t6nh1
+                  minimum: 0
+                  maximum: 3
+                  description: 'Port number, e.g. 0,1,2,3'
+                value:
+                  type: integer
+                  x-stoplight:
+                    id: bc2bvicj0xco7
+                  description: Serving volume in mL. Can be positive or negative
+                duration:
+                  type: integer
+                  x-stoplight:
+                    id: 1tufl9fwox91i
+                  description: Serving duration in ms
+              required:
+                - port
+                - value
+                - duration
 components:
   schemas:
     port-config:
