@@ -1761,7 +1761,7 @@ paths:
     parameters: []
   /api/v2/m/device/rpc/Kegtron.ManServUpdate:
     post:
-      summary: Manual Serving Update
+      summary: Manual Serving Update POST
       tags: []
       responses:
         '200':
@@ -1770,7 +1770,14 @@ paths:
       description: This remote procedure call (RPC) manually adds an entry to the 'servings' database table. Servings can be positive or negative values. A negative value may be used to 'undo' an existing serving that was recorded by mistake.
       security:
         - DEVICE_PUBLIC_KEY: []
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          required: true
+          description: ''
       requestBody:
         content:
           application/json:
@@ -1798,6 +1805,12 @@ paths:
                 - port
                 - value
                 - duration
+            examples:
+              'Subtract a 500mL serving on port 1':
+                value:
+                  port: 1
+                  value: -500
+                  duration: 0
 components:
   schemas:
     port-config:
