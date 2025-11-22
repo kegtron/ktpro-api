@@ -542,6 +542,7 @@ paths:
                                 required:
                                   - cleanActive
                                   - connectedWiFiSSID
+                                  - extAdcPresent
                                   - fwRev
                                   - humidity
                                   - hwRev
@@ -553,10 +554,16 @@ paths:
                                   - port2
                                   - port3
                                   - portCount
+                                  - presA
+                                  - presB
+                                  - pressureAPresent
+                                  - pressureBPresent
                                   - priWiFiPass
                                   - priWiFiSSID
                                   - serialNum
                                   - temp
+                                  - wifiMode
+                                  - wifiSuccess
                                 properties:
                                   cleanActive:
                                     type: integer
@@ -565,8 +572,11 @@ paths:
                                     type: string
                                     minLength: 1
                                     description: SSID of currently connected WiFi network
-                                  fwRev:
+                                  extAdcPresent:
                                     type: integer
+                                    description: External ADC present on interface PCBA
+                                  fwRev:
+                                    type: string
                                     description: Firmware revision
                                   humidity:
                                     type: number
@@ -605,22 +615,22 @@ paths:
                                         type: string
                                         description: Date keg was tapped in YYYY/MM/DD format
                                       kFactor:
-                                        type: number
+                                        type: integer
                                         description: Flow meter k-factor
                                       kegsServed:
-                                        type: number
+                                        type: integer
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) of most resent serving
                                       pulseCnt:
-                                        type: number
+                                        type: integer
                                         description: Total number of flow meter pulses accummulated since last keg volume reset
                                       volDisp:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
-                                        type: number
+                                        type: integer
                                         description: Starting fill volume (mL) of keg when tapped
                                   port1:
                                     type: object
@@ -642,22 +652,22 @@ paths:
                                         type: string
                                         description: Date keg was tapped in YYYY/MM/DD format
                                       kFactor:
-                                        type: number
+                                        type: integer
                                         description: Flow meter k-factor
                                       kegsServed:
-                                        type: number
+                                        type: integer
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) of most resent serving
                                       pulseCnt:
-                                        type: number
+                                        type: integer
                                         description: Total number of flow meter pulses accummulated since last keg volume reset
                                       volDisp:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
-                                        type: number
+                                        type: integer
                                         description: Starting fill volume (mL) of keg when tapped
                                   port2:
                                     type: object
@@ -679,22 +689,22 @@ paths:
                                         type: string
                                         description: Date keg was tapped in YYYY/MM/DD format
                                       kFactor:
-                                        type: number
+                                        type: integer
                                         description: Flow meter k-factor
                                       kegsServed:
-                                        type: number
+                                        type: integer
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) of most resent serving
                                       pulseCnt:
-                                        type: number
+                                        type: integer
                                         description: Total number of flow meter pulses accummulated since last keg volume reset
                                       volDisp:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
-                                        type: number
+                                        type: integer
                                         description: Starting fill volume (mL) of keg when tapped
                                   port3:
                                     type: object
@@ -716,26 +726,42 @@ paths:
                                         type: string
                                         description: Date keg was tapped in YYYY/MM/DD format
                                       kFactor:
-                                        type: number
+                                        type: integer
                                         description: Flow meter k-factor
                                       kegsServed:
-                                        type: number
+                                        type: integer
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) of most resent serving
                                       pulseCnt:
-                                        type: number
+                                        type: integer
                                         description: Total number of flow meter pulses accummulated since last keg volume reset
                                       volDisp:
-                                        type: number
+                                        type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
-                                        type: number
+                                        type: integer
                                         description: Starting fill volume (mL) of keg when tapped
                                   portCount:
                                     type: integer
                                     description: Keg monitor port count
+                                    readOnly: true
+                                  presA:
+                                    type: integer
+                                    description: Aux port A pressure value (mbar)
+                                    readOnly: true
+                                  presB:
+                                    type: integer
+                                    description: Aux port B pressure value (mbar)
+                                    readOnly: true
+                                  pressureAPresent:
+                                    type: integer
+                                    description: Pressure sensor detected on Aux port A
+                                    readOnly: true
+                                  pressureBPresent:
+                                    type: integer
+                                    description: Pressure sensor detected on Aux port B
                                     readOnly: true
                                   priWiFiPass:
                                     type: string
@@ -752,6 +778,14 @@ paths:
                                   temp:
                                     type: number
                                     description: Ambient air temperature (deg C) from last reading
+                                  wifiMode:
+                                    type: integer
+                                    description: 'WiFi Mode: 0 - run STA mode at next restart, 1 - run APSTA mode with webserver at next restart'
+                                  wifiSuccess:
+                                    type: integer
+                                    description: |-
+                                      WiFi success status: 1 - The device has successfully connected to the priWifiSSID or
+                                      secWifiSSID network in STA mode at least once. 0 - After 5 consecutive unsuccessful attempts to connect to priWifiSSID or secWifiSSID, device will restart in APSTA mode
                               online:
                                 type: boolean
                                 description: Cloud connection status
