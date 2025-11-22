@@ -1009,6 +1009,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - shadow
               properties:
                 shadow:
                   type: object
@@ -1072,9 +1074,6 @@ paths:
                                   type: integer
                                 cleanDetectPeriodMs:
                                   type: integer
-                                cleanEna:
-                                  type: integer
-                                  deprecated: true
                                 cleaningDelay:
                                   type: integer
                                   description: Delay in minutes after which time cleaning mode will automatically be disabled
@@ -1125,8 +1124,6 @@ paths:
                                 timezoneLoc:
                                   type: string
                                   description: Time Zone Location
-              required:
-                - shadow
         description: ''
       parameters:
         - schema:
@@ -1806,7 +1803,7 @@ paths:
                 - value
                 - duration
             examples:
-              'Subtract a 500mL serving on port 1':
+              Subtract a 500mL serving on port 1:
                 value:
                   port: 1
                   value: -500
