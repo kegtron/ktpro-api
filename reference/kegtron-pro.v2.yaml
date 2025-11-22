@@ -1208,98 +1208,427 @@ paths:
                               properties:
                                 afterHoursAlertEmailEna:
                                   type: integer
+                                  description: Enable generation of alert emails when serving activity detected outside bizHours
                                 afterHoursAlertSmsEna:
                                   type: integer
+                                  description: Enable generation of alert SMS when serving activity detected outside bizHours
                                 alertEmail:
                                   type: string
+                                  minLength: 1
+                                  description: Destination email adddress(es) for alerts. Multiple addresses must be comma separated.
                                 alertSmsToNumber:
                                   type: string
+                                  minLength: 1
+                                  description: Destination phone number(s) for SMS alerts. Multiple numbers must be comma separated.
                                 autoCounterRstEna:
                                   type: integer
+                                  description: 'Enable automatic reset of keg volume when keg is empty '
                                 beaconEna:
                                   type: integer
+                                  description: Enable flashing beacon LED for device
                                 bizHourFriDuration:
                                   type: integer
+                                  description: Friday business hour duration in minutes
                                 bizHourFriStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Friday start of business time in 24hr HH:MM format'
                                 bizHourMonDuration:
                                   type: integer
+                                  description: Monday business hour duration in minutes
                                 bizHourMonStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Monday start of business time in 24hr HH:MM format'
                                 bizHourSatDuration:
                                   type: integer
+                                  description: Saturday business hour duration in minutes
                                 bizHourSatStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Saturday start of business time in 24hr HH:MM format'
                                 bizHourSunDuration:
                                   type: integer
+                                  description: Sunday business hour duration in minutes
                                 bizHourSunStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Sunday start of business time in 24hr HH:MM format'
                                 bizHourThuDuration:
                                   type: integer
+                                  description: Thursday business hour duration in minutes
                                 bizHourThuStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Thursday start of business time in 24hr HH:MM format'
                                 bizHourTueDuration:
                                   type: integer
+                                  description: Tuesday business hour duration in minutes
                                 bizHourTueStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Tuesday start of business time in 24hr HH:MM format'
                                 bizHourWedDuration:
                                   type: integer
+                                  description: Wednesday business hour duration in minutes
                                 bizHourWedStart:
                                   type: string
+                                  minLength: 1
+                                  description: 'Wednesday start of business time in 24hr HH:MM format'
                                 bleEna:
                                   type: integer
+                                  description: Enable Bluetooth (BLE)
                                 cleanDetectPeriodMs:
                                   type: integer
+                                  description: Auto cleaning cycle detection period in ms. Continous flow exceeding this value will trigger cleaning cycle.
                                 cleaningDelay:
                                   type: integer
-                                  description: Delay in minutes after which time cleaning mode will automatically be disabled
+                                  description: Cleaning cycle auto disable timer in minutes
+                                cleanModeSolo:
+                                  type: integer
+                                  description: |-
+                                    Cleaning cycle mode:
+                                    0 - Cleaning cycle common to all ports, 
+                                    1 - Cleaning cycle independent for each port
+                                cleaningOverdueThreshold:
+                                  type: integer
+                                  description: Cleaning overdue alert threshold (days)
                                 displayUnits:
                                   type: integer
-                                  description: '0: Metric, 1: US Customary'
+                                  description: 'Display units: 0 = metric, 1 = US Customary'
                                 emptyThreshold:
                                   type: integer
+                                  description: Empty alert threshold keg level percentage
                                 emptyThresholdAlertEmailEna:
                                   type: integer
+                                  description: Enable keg level empty threshold email alerts
                                 emptyThresholdAlertSmsEna:
                                   type: integer
+                                  description: Enable keg level empty threshold SMS alerts
                                 humidityOffset:
                                   type: number
-                                  description: Offset applied to all measurements
+                                  description: 'Humidity offset. This value is added to the raw sensor value to calculate  config_readonly.humidity '
+                                kegAgeThreshold:
+                                  type: integer
+                                  description: Keg age alert threshold (days)
                                 lowThreshold:
                                   type: integer
+                                  description: Low alert threshold keg level percentage
                                 lowThresholdAlertEmailEna:
                                   type: integer
+                                  description: Enable keg level low threshold email alerts
                                 lowThresholdAlertSmsEna:
                                   type: integer
+                                  description: Enable keg level low threshold SMS alerts
+                                offlineAlertEna:
+                                  type: integer
+                                  description: Enable offlline alerts
                                 port0:
-                                  $ref: '#/components/schemas/port-config'
+                                  type: object
+                                  description: Logical port 0 / user port 1
+                                  required:
+                                    - abv
+                                    - beaconEna
+                                    - calOffset
+                                    - drinkSize
+                                    - ibu
+                                    - maker
+                                    - state
+                                    - style
+                                    - tapLabel
+                                    - userDesc
+                                    - userName
+                                    - volSize
+                                  properties:
+                                    abv:
+                                      type: number
+                                      description: Alcohol by volume (%)
+                                    beaconEna:
+                                      type: integer
+                                      description: Port beacon enable
+                                    calOffset:
+                                      type: number
+                                      description: Calibration offset correction (%) applied to each serving
+                                    drinkSize:
+                                      type: number
+                                      description: Default serving size volume (mL) use to estimate remaining servings
+                                    ibu:
+                                      type: integer
+                                      description: International Bitterness Units
+                                    maker:
+                                      type: string
+                                      description: Maker/Producer of bevergage
+                                    state:
+                                      type: number
+                                      description: 'Port state: 1 = enabled, 0 = disabled'
+                                    style:
+                                      type: string
+                                      description: Beverage style
+                                    tapLabel:
+                                      type: string
+                                      minLength: 1
+                                      description: Tap handle label (usually a number)
+                                      maxLength: 6
+                                    userDesc:
+                                      type: string
+                                      description: Kegged beverage description
+                                    userName:
+                                      type: string
+                                      minLength: 1
+                                      description: Kegged beverage name
+                                    volSize:
+                                      type: integer
+                                      description: Keg size volume (mL)
                                 port1:
-                                  $ref: '#/components/schemas/port-config'
+                                  type: object
+                                  description: Logical port 1 / user port 2
+                                  required:
+                                    - abv
+                                    - beaconEna
+                                    - calOffset
+                                    - drinkSize
+                                    - ibu
+                                    - maker
+                                    - state
+                                    - style
+                                    - tapLabel
+                                    - userDesc
+                                    - userName
+                                    - volSize
+                                  properties:
+                                    abv:
+                                      type: number
+                                      description: Alcohol by volume (%)
+                                    beaconEna:
+                                      type: integer
+                                      description: Port beacon enable
+                                    calOffset:
+                                      type: number
+                                      description: Calibration offset correction (%) applied to each serving
+                                    drinkSize:
+                                      type: number
+                                      description: Default serving size volume (mL) use to estimate remaining servings
+                                    ibu:
+                                      type: integer
+                                      description: International Bitterness Units
+                                    maker:
+                                      type: string
+                                      description: Maker/Producer of bevergage
+                                    state:
+                                      type: number
+                                      description: 'Port state: 1 = enabled, 0 = disabled'
+                                    style:
+                                      type: string
+                                      description: Beverage style
+                                    tapLabel:
+                                      type: string
+                                      minLength: 1
+                                      description: Tap handle label (usually a number)
+                                      maxLength: 6
+                                    userDesc:
+                                      type: string
+                                      description: Kegged beverage description
+                                    userName:
+                                      type: string
+                                      minLength: 1
+                                      description: Kegged beverage name
+                                    volSize:
+                                      type: integer
+                                      description: Keg size volume (mL)
                                 port2:
-                                  $ref: '#/components/schemas/port-config'
+                                  type: object
+                                  description: Logical port 2 / user port 3
+                                  required:
+                                    - abv
+                                    - beaconEna
+                                    - calOffset
+                                    - drinkSize
+                                    - ibu
+                                    - maker
+                                    - state
+                                    - style
+                                    - tapLabel
+                                    - userDesc
+                                    - userName
+                                    - volSize
+                                  properties:
+                                    abv:
+                                      type: number
+                                      description: Alcohol by volume (%)
+                                    beaconEna:
+                                      type: integer
+                                      description: Port beacon enable
+                                    calOffset:
+                                      type: number
+                                      description: Calibration offset correction (%) applied to each serving
+                                    drinkSize:
+                                      type: number
+                                      description: Default serving size volume (mL) use to estimate remaining servings
+                                    ibu:
+                                      type: integer
+                                      description: International Bitterness Units
+                                    maker:
+                                      type: string
+                                      description: Maker/Producer of bevergage
+                                    state:
+                                      type: number
+                                      description: 'Port state: 1 = enabled, 0 = disabled'
+                                    style:
+                                      type: string
+                                      description: Beverage style
+                                    tapLabel:
+                                      type: string
+                                      minLength: 1
+                                      description: Tap handle label (usually a number)
+                                      maxLength: 6
+                                    userDesc:
+                                      type: string
+                                      description: Kegged beverage description
+                                    userName:
+                                      type: string
+                                      minLength: 1
+                                      description: Kegged beverage name
+                                    volSize:
+                                      type: integer
+                                      description: Keg size volume (mL)
                                 port3:
-                                  $ref: '#/components/schemas/port-config'
+                                  type: object
+                                  description: Logical port 3 / user port 4
+                                  required:
+                                    - abv
+                                    - beaconEna
+                                    - calOffset
+                                    - drinkSize
+                                    - ibu
+                                    - maker
+                                    - state
+                                    - style
+                                    - tapLabel
+                                    - userDesc
+                                    - userName
+                                    - volSize
+                                  properties:
+                                    abv:
+                                      type: number
+                                      description: Alcohol by volume (%)
+                                    beaconEna:
+                                      type: integer
+                                      description: Port beacon enable
+                                    calOffset:
+                                      type: number
+                                      description: Calibration offset correction (%) applied to each serving
+                                    drinkSize:
+                                      type: number
+                                      description: Default serving size volume (mL) use to estimate remaining servings
+                                    ibu:
+                                      type: integer
+                                      description: International Bitterness Units
+                                    maker:
+                                      type: string
+                                      description: Maker/Producer of bevergage
+                                    state:
+                                      type: number
+                                      description: 'Port state: 1 = enabled, 0 = disabled'
+                                    style:
+                                      type: string
+                                      description: Beverage style
+                                    tapLabel:
+                                      type: string
+                                      minLength: 1
+                                      description: Tap handle label (usually a number)
+                                      maxLength: 6
+                                    userDesc:
+                                      type: string
+                                      description: Kegged beverage description
+                                    userName:
+                                      type: string
+                                      minLength: 1
+                                      description: Kegged beverage name
+                                    volSize:
+                                      type: integer
+                                      description: Keg size volume (mL)
+                                pressureAlertClearThresholdA:
+                                  type: integer
+                                  description: Pressure alert clear threshold for Aux port A in mbar
+                                pressureAlertClearThresholdB:
+                                  type: integer
+                                  description: Pressure alert clear threshold for Aux port B in mbar
+                                pressureAlertEmailEna:
+                                  type: integer
+                                  description: Enable email pressure alerts
+                                pressureAlertHighThresholdA:
+                                  type: integer
+                                  description: Pressure alert high threshold for Aux port A in mbar
+                                pressureAlertHighThresholdB:
+                                  type: integer
+                                  description: Pressure alert high threshold for Aux port B in mbar
+                                pressureAlertLowThresholdA:
+                                  type: integer
+                                  description: Pressure alert low threshold for Aux port A in mbar
+                                pressureAlertLowThresholdB:
+                                  type: integer
+                                  description: Pressure alert low threshold for Aux port B in mbar
+                                pressureAlertSmsEna:
+                                  type: integer
+                                  description: Enable SMS pressure alerts
+                                pressureAlertSoakPeriod:
+                                  type: integer
+                                  description: Pressure alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
+                                pressureTypeA:
+                                  type: integer
+                                  description: 'Aux port A pressure sensor type: 0 - low pressure, 1 - high pressure'
+                                pressureTypeB:
+                                  type: integer
+                                  description: 'Aux port B pressure sensor type: 0 - low pressure, 1 - high pressure'
                                 secWiFiPass:
                                   type: string
-                                  description: Secondary WiFi password
+                                  minLength: 1
+                                  description: Password of secondary WiFi
                                 secWiFiSSID:
                                   type: string
-                                  description: Secondary WiFi SSID
+                                  minLength: 1
+                                  description: SSID of secondary WiFi
                                 servingMs:
                                   type: integer
                                   description: Time between servings in ms
                                 siteName:
                                   type: string
+                                  minLength: 1
                                   description: Site name
+                                tempAlertClearThreshold:
+                                  type: integer
+                                  description: 'Temperature alert hysteresis value in degrees C. An active alarm will be cleared once this threshold is crossed. '
+                                tempAlertEmailEna:
+                                  type: integer
+                                  description: Enable email temperature alerts
+                                tempAlertHighThreshold:
+                                  type: number
+                                  description: Temperature alert high threshold in degrees C
+                                tempAlertLowThreshold:
+                                  type: number
+                                  description: Temperature alert low threshold in degrees C
+                                tempAlertSmsEna:
+                                  type: integer
+                                  description: Enable SMS temperature alerts
+                                tempAlertSoakPeriod:
+                                  type: integer
+                                  description: Temperature alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
                                 tempOffset:
                                   type: number
-                                  description: Offset applied to all measurements
+                                  description: 'Temperature offset. This value is added to the raw sensor value to calculate config_readonly.temp '
                                 timezone:
                                   type: string
-                                  description: Time Zone in GNU TZ format
+                                  minLength: 1
+                                  description: 'Time zone in GNU tz format. See https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html '
+                                  example: 'PST8PDT,M3.2.0,M11.1.0'
                                 timezoneLoc:
                                   type: string
-                                  description: Time Zone Location
+                                  minLength: 1
+                                  description: 'Time zone location. See https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv for valid list'
+                                  example: America/Los_Angeles
+                                udpMcastEna:
+                                  type: integer
+                                  description: Enable UDP multicasting of realtime measurement statistics
         description: ''
       parameters:
         - schema:
