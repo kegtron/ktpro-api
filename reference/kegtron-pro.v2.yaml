@@ -2329,30 +2329,39 @@ components:
         calOffset:
           type: number
           description: Calibration offset %
-        userName:
-          type: string
-          description: User description of keg attached to this port
-        userDesc:
-          type: string
-          description: User name of keg attached to this port
         drinkSize:
           type: integer
           description: Serving volume in mL. Used for servings remaining estimation.
         ibu:
           type: integer
           description: International Bittering Units rating
+        kegCost:
+          type: number
+          description: Cost of keg
+        labelUrl:
+          type: string
+          description: Encoded URL of graphic associated with keg
         maker:
           type: string
           description: 'Beverage manufacturer (e.g. brewery, winery, etc.)'
+        srm:
+          type: integer
+          description: Standard Reference Method (SRM) value describing color of beverage
         state:
           type: integer
-          description: For future use
+          description: 'Port state: 1 - online, 0 - offline'
         style:
           type: string
           description: 'Description of beverage classification (e.g. Pilsner, Merlot, etc.)'
         tapLabel:
           type: string
           description: Customer tap handle label (usually a number)
+        userDesc:
+          type: string
+          description: User name of keg attached to this port
+        userName:
+          type: string
+          description: User description of keg attached to this port
         volSize:
           type: integer
           description: Keg volume in mL
