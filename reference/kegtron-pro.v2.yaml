@@ -71,25 +71,47 @@ paths:
                                   - bleEna
                                   - cleanDetectPeriodMs
                                   - cleaningDelay
+                                  - cleanModeSolo
+                                  - cleaningOverdueThreshold
                                   - displayUnits
+                                  - emptyThreshold
                                   - emptyThresholdAlertEmailEna
                                   - emptyThresholdAlertSmsEna
-                                  - emptyThreshold
                                   - humidityOffset
+                                  - kegAgeThreshold
                                   - lowThreshold
                                   - lowThresholdAlertEmailEna
                                   - lowThresholdAlertSmsEna
+                                  - offlineAlertEna
                                   - port0
                                   - port1
                                   - port2
                                   - port3
+                                  - pressureAlertClearThresholdA
+                                  - pressureAlertClearThresholdB
+                                  - pressureAlertEmailEna
+                                  - pressureAlertHighThresholdA
+                                  - pressureAlertHighThresholdB
+                                  - pressureAlertLowThresholdA
+                                  - pressureAlertLowThresholdB
+                                  - pressureAlertSmsEna
+                                  - pressureAlertSoakPeriod
+                                  - pressureTypeA
+                                  - pressureTypeB
                                   - secWiFiPass
                                   - secWiFiSSID
                                   - servingMs
                                   - siteName
+                                  - tempAlertClearThreshold
+                                  - tempAlertEmailEna
+                                  - tempAlertHighThreshold
+                                  - tempAlertLowThreshold
+                                  - tempAlertSmsEna
+                                  - tempAlertSoakPeriod
                                   - tempOffset
                                   - timezone
                                   - timezoneLoc
+                                  - udpMcastEna
                                 properties:
                                   afterHoursAlertEmailEna:
                                     type: integer
@@ -169,30 +191,45 @@ paths:
                                   cleaningDelay:
                                     type: integer
                                     description: Cleaning cycle auto disable timer in minutes
+                                  cleanModeSolo:
+                                    type: integer
+                                    description: |-
+                                      Cleaning cycle mode:
+                                      0 - Cleaning cycle common to all ports, 
+                                      1 - Cleaning cycle independent for each port
+                                  cleaningOverdueThreshold:
+                                    type: integer
+                                    description: Cleaning overdue alert threshold (days)
                                   displayUnits:
                                     type: integer
                                     description: 'Display units: 0 = metric, 1 = US Customary'
+                                  emptyThreshold:
+                                    type: integer
+                                    description: Empty alert threshold keg level percentage
                                   emptyThresholdAlertEmailEna:
                                     type: integer
                                     description: Enable keg level empty threshold email alerts
                                   emptyThresholdAlertSmsEna:
-                                    type: number
+                                    type: integer
                                     description: Enable keg level empty threshold SMS alerts
-                                  emptyThreshold:
-                                    type: number
-                                    description: Empty alert threshold keg level percentage
                                   humidityOffset:
                                     type: number
                                     description: 'Humidity offset. This value is added to the raw sensor value to calculate  config_readonly.humidity '
+                                  kegAgeThreshold:
+                                    type: integer
+                                    description: Keg age alert threshold (days)
                                   lowThreshold:
-                                    type: number
+                                    type: integer
                                     description: Low alert threshold keg level percentage
                                   lowThresholdAlertEmailEna:
-                                    type: number
+                                    type: integer
                                     description: Enable keg level low threshold email alerts
                                   lowThresholdAlertSmsEna:
-                                    type: number
+                                    type: integer
                                     description: Enable keg level low threshold SMS alerts
+                                  offlineAlertEna:
+                                    type: integer
+                                    description: Enable offlline alerts
                                   port0:
                                     type: object
                                     description: Logical port 0 / user port 1
@@ -224,7 +261,7 @@ paths:
                                         description: Default serving size volume (mL) use to estimate remaining servings
                                       ibu:
                                         type: integer
-                                        description: 'International Bitterness Units '
+                                        description: International Bitterness Units
                                       maker:
                                         type: string
                                         description: Maker/Producer of bevergage
@@ -280,7 +317,7 @@ paths:
                                         description: Default serving size volume (mL) use to estimate remaining servings
                                       ibu:
                                         type: integer
-                                        description: 'International Bitterness Units '
+                                        description: International Bitterness Units
                                       maker:
                                         type: string
                                         description: Maker/Producer of bevergage
@@ -336,7 +373,7 @@ paths:
                                         description: Default serving size volume (mL) use to estimate remaining servings
                                       ibu:
                                         type: integer
-                                        description: 'International Bitterness Units '
+                                        description: International Bitterness Units
                                       maker:
                                         type: string
                                         description: Maker/Producer of bevergage
@@ -392,7 +429,7 @@ paths:
                                         description: Default serving size volume (mL) use to estimate remaining servings
                                       ibu:
                                         type: integer
-                                        description: 'International Bitterness Units '
+                                        description: International Bitterness Units
                                       maker:
                                         type: string
                                         description: Maker/Producer of bevergage
@@ -417,6 +454,39 @@ paths:
                                       volSize:
                                         type: integer
                                         description: Keg size volume (mL)
+                                  pressureAlertClearThresholdA:
+                                    type: integer
+                                    description: Pressure alert clear threshold for Aux port A in mbar
+                                  pressureAlertClearThresholdB:
+                                    type: integer
+                                    description: Pressure alert clear threshold for Aux port B in mbar
+                                  pressureAlertEmailEna:
+                                    type: integer
+                                    description: Enable email pressure alerts
+                                  pressureAlertHighThresholdA:
+                                    type: integer
+                                    description: Pressure alert high threshold for Aux port A in mbar
+                                  pressureAlertHighThresholdB:
+                                    type: integer
+                                    description: Pressure alert high threshold for Aux port B in mbar
+                                  pressureAlertLowThresholdA:
+                                    type: integer
+                                    description: Pressure alert low threshold for Aux port A in mbar
+                                  pressureAlertLowThresholdB:
+                                    type: integer
+                                    description: Pressure alert low threshold for Aux port B in mbar
+                                  pressureAlertSmsEna:
+                                    type: integer
+                                    description: Enable SMS pressure alerts
+                                  pressureAlertSoakPeriod:
+                                    type: integer
+                                    description: Pressure alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
+                                  pressureTypeA:
+                                    type: integer
+                                    description: 'Aux port A pressure sensor type: 0 - low pressure, 1 - high pressure'
+                                  pressureTypeB:
+                                    type: integer
+                                    description: 'Aux port B pressure sensor type: 0 - low pressure, 1 - high pressure'
                                   secWiFiPass:
                                     type: string
                                     minLength: 1
@@ -432,9 +502,27 @@ paths:
                                     type: string
                                     minLength: 1
                                     description: Site name
+                                  tempAlertClearThreshold:
+                                    type: integer
+                                    description: 'Temperature alert hysteresis value in degrees C. An active alarm will be cleared once this threshold is crossed. '
+                                  tempAlertEmailEna:
+                                    type: integer
+                                    description: Enable email temperature alerts
+                                  tempAlertHighThreshold:
+                                    type: number
+                                    description: Temperature alert high threshold in degrees C
+                                  tempAlertLowThreshold:
+                                    type: number
+                                    description: Temperature alert low threshold in degrees C
+                                  tempAlertSmsEna:
+                                    type: integer
+                                    description: Enable SMS temperature alerts
+                                  tempAlertSoakPeriod:
+                                    type: integer
+                                    description: Temperature alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
                                   tempOffset:
                                     type: number
-                                    description: 'Temperature offset. This value is added to the raw sensor value to calculate  config_readonly.temp '
+                                    description: 'Temperature offset. This value is added to the raw sensor value to calculate config_readonly.temp '
                                   timezone:
                                     type: string
                                     minLength: 1
@@ -445,6 +533,9 @@ paths:
                                     minLength: 1
                                     description: 'Time zone location. See https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv for valid list'
                                     example: America/Los_Angeles
+                                  udpMcastEna:
+                                    type: integer
+                                    description: Enable UDP multicasting of realtime measurement statistics
                               config_readonly:
                                 type: object
                                 description: Read-only configuration/status keys
