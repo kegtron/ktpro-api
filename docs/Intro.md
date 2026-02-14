@@ -8,7 +8,7 @@ Kegtron Pro uses a REST API to interact with keg monitor hardware ("devices")
 2. Read or write from individual devices or ports using other GET/POST endpoints
 
 #### Device Notifications
-- Enable WebSockets to get live push notifications of device updates
+- Use WebSocket notifications to push live device updates
 - See the Notifications tab to the left
 
 #### Endpoint details can be found by clicking the tab to the left

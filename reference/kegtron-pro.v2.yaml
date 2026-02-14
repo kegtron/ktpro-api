@@ -2261,6 +2261,109 @@ paths:
 
           'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
     parameters: []
+  /api/v2/m/device/data/servings-site:
+    post:
+      summary: Servings-Site POST
+      operationId: post-api-v2-m-device-data-servings-site
+      responses:
+        '200':
+          description: OK
+      description: |-
+        Query servings for all ports and all devices for a specfic site. 
+
+        **NOTE:**
+        The access_token can be any DEVICE_PUBLIC_KEY (pubkey) from any device associated with the target site.
+      parameters:
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          required: true
+          description: ''
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - params
+              properties:
+                params:
+                  type: array
+                  description: '["StartDateTime", "EndDateTime"]'
+                  items:
+                    type: string
+            examples:
+              'Query site from February 1, 2026 until now':
+                value:
+                  params:
+                    - Moe's Tavern
+                    - '2026-02-01'
+                    - now
+        description: |
+          "params" is an array with three keys:
+          * site name (device object siteName key)
+          * start datetime
+          * end datetime
+
+          'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
+      x-stoplight:
+        id: 03l89s4x21sq2
+    parameters: []
+  /api/v2/m/device/data/servings-all:
+    post:
+      summary: Servings-All POST
+      operationId: post-api-v2-m-device-data-servings-all
+      responses:
+        '200':
+          description: OK
+      description: |-
+        Query servings for all ports, devices and sites associated with a customer.
+
+        **NOTE:**
+        The access_token can be any DEVICE_PUBLIC_KEY (pubkey) from any device associated with the target customer.
+      parameters:
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          required: true
+          description: ''
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                params:
+                  type: array
+                  description: '["StartDateTime", "EndDateTime"]'
+                  items:
+                    type: string
+              required:
+                - params
+            examples:
+              'Query device from February 1, 2026 until now':
+                value:
+                  params:
+                    - '2026-02-01'
+                    - now
+        description: |
+          "params" is an array with two keys:
+          * start datetime
+          * end datetime
+
+          'datetime' can be any valid SQLite time string. See https://www.sqlite.org/lang_datefunc.html for details.
+      x-stoplight:
+        id: zccjpf3qlfplt
+    parameters: []
   /api/v2/m/device/rpc/Kegtron.ManServUpdate:
     post:
       summary: Manual Serving Update POST
