@@ -9,11 +9,21 @@ info:
     url: kegtron.com
 servers:
   - url: 'https://mdash.net'
+tags:
+  - name: Device
+    description: Read and write device configuration via the device shadow
+  - name: Customer
+    description: Retrieve account information and device list
+  - name: RPC
+    description: Send commands directly to a device
+  - name: Data
+    description: Query historical servings, alerts, and telemetry
 paths:
   /api/v2/m/device:
     get:
       summary: Device GET
-      tags: []
+      tags:
+        - Device
       responses:
         '200':
           description: OK
@@ -232,277 +242,21 @@ paths:
                                     type: integer
                                     description: Enable offline alerts
                                   port0:
-                                    type: object
                                     description: Logical port 0 / user port 1
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
-                                    properties:
-                                      abv:
-                                        type: number
-                                        description: Alcohol by volume (%)
-                                      beaconEna:
-                                        type: integer
-                                        description: Port beacon enable
-                                      calOffset:
-                                        type: number
-                                        description: Calibration offset correction (%) applied to each serving
-                                      drinkSize:
-                                        type: number
-                                        description: Default serving size volume (mL) use to estimate remaining servings
-                                      ibu:
-                                        type: integer
-                                        description: International Bitterness Units
-                                      maker:
-                                        type: string
-                                        description: Maker/Producer of beverage
-                                      state:
-                                        type: number
-                                        description: 'Port state: 1 = enabled, 0 = disabled'
-                                      style:
-                                        type: string
-                                        description: Beverage style
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                        description: Tap handle label (usually a number)
-                                        maxLength: 6
-                                      userDesc:
-                                        type: string
-                                        description: Kegged beverage description
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                        description: Kegged beverage name
-                                      volSize:
-                                        type: integer
-                                        description: Keg size volume (mL)
-                                      distributor:
-                                        type: string
-                                        description: Beverage distributor name
-                                      kegCost:
-                                        type: number
-                                        description: Cost of keg
-                                      labelUrl:
-                                        type: integer
-                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                      srm:
-                                        type: integer
-                                        description: Standard Reference Method (SRM) color rating
+                                    allOf:
+                                      - $ref: '#/components/schemas/port-config'
                                   port1:
-                                    type: object
                                     description: Logical port 1 / user port 2
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
-                                    properties:
-                                      abv:
-                                        type: number
-                                        description: Alcohol by volume (%)
-                                      beaconEna:
-                                        type: integer
-                                        description: Port beacon enable
-                                      calOffset:
-                                        type: number
-                                        description: Calibration offset correction (%) applied to each serving
-                                      drinkSize:
-                                        type: number
-                                        description: Default serving size volume (mL) use to estimate remaining servings
-                                      ibu:
-                                        type: integer
-                                        description: International Bitterness Units
-                                      maker:
-                                        type: string
-                                        description: Maker/Producer of beverage
-                                      state:
-                                        type: number
-                                        description: 'Port state: 1 = enabled, 0 = disabled'
-                                      style:
-                                        type: string
-                                        description: Beverage style
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                        description: Tap handle label (usually a number)
-                                        maxLength: 6
-                                      userDesc:
-                                        type: string
-                                        description: Kegged beverage description
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                        description: Kegged beverage name
-                                      volSize:
-                                        type: integer
-                                        description: Keg size volume (mL)
-                                      distributor:
-                                        type: string
-                                        description: Beverage distributor name
-                                      kegCost:
-                                        type: number
-                                        description: Cost of keg
-                                      labelUrl:
-                                        type: integer
-                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                      srm:
-                                        type: integer
-                                        description: Standard Reference Method (SRM) color rating
+                                    allOf:
+                                      - $ref: '#/components/schemas/port-config'
                                   port2:
-                                    type: object
                                     description: Logical port 2 / user port 3
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
-                                    properties:
-                                      abv:
-                                        type: number
-                                        description: Alcohol by volume (%)
-                                      beaconEna:
-                                        type: integer
-                                        description: Port beacon enable
-                                      calOffset:
-                                        type: number
-                                        description: Calibration offset correction (%) applied to each serving
-                                      drinkSize:
-                                        type: number
-                                        description: Default serving size volume (mL) use to estimate remaining servings
-                                      ibu:
-                                        type: integer
-                                        description: International Bitterness Units
-                                      maker:
-                                        type: string
-                                        description: Maker/Producer of beverage
-                                      state:
-                                        type: number
-                                        description: 'Port state: 1 = enabled, 0 = disabled'
-                                      style:
-                                        type: string
-                                        description: Beverage style
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                        description: Tap handle label (usually a number)
-                                        maxLength: 6
-                                      userDesc:
-                                        type: string
-                                        description: Kegged beverage description
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                        description: Kegged beverage name
-                                      volSize:
-                                        type: integer
-                                        description: Keg size volume (mL)
-                                      distributor:
-                                        type: string
-                                        description: Beverage distributor name
-                                      kegCost:
-                                        type: number
-                                        description: Cost of keg
-                                      labelUrl:
-                                        type: integer
-                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                      srm:
-                                        type: integer
-                                        description: Standard Reference Method (SRM) color rating
+                                    allOf:
+                                      - $ref: '#/components/schemas/port-config'
                                   port3:
-                                    type: object
                                     description: Logical port 3 / user port 4
-                                    required:
-                                      - abv
-                                      - beaconEna
-                                      - calOffset
-                                      - drinkSize
-                                      - ibu
-                                      - maker
-                                      - state
-                                      - style
-                                      - tapLabel
-                                      - userDesc
-                                      - userName
-                                      - volSize
-                                    properties:
-                                      abv:
-                                        type: number
-                                        description: Alcohol by volume (%)
-                                      beaconEna:
-                                        type: integer
-                                        description: Port beacon enable
-                                      calOffset:
-                                        type: number
-                                        description: Calibration offset correction (%) applied to each serving
-                                      drinkSize:
-                                        type: number
-                                        description: Default serving size volume (mL) use to estimate remaining servings
-                                      ibu:
-                                        type: integer
-                                        description: International Bitterness Units
-                                      maker:
-                                        type: string
-                                        description: Maker/Producer of beverage
-                                      state:
-                                        type: number
-                                        description: 'Port state: 1 = enabled, 0 = disabled'
-                                      style:
-                                        type: string
-                                        description: Beverage style
-                                      tapLabel:
-                                        type: string
-                                        minLength: 1
-                                        description: Tap handle label (usually a number)
-                                        maxLength: 6
-                                      userDesc:
-                                        type: string
-                                        description: Kegged beverage description
-                                      userName:
-                                        type: string
-                                        minLength: 1
-                                        description: Kegged beverage name
-                                      volSize:
-                                        type: integer
-                                        description: Keg size volume (mL)
-                                      distributor:
-                                        type: string
-                                        description: Beverage distributor name
-                                      kegCost:
-                                        type: number
-                                        description: Cost of keg
-                                      labelUrl:
-                                        type: integer
-                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                      srm:
-                                        type: integer
-                                        description: Standard Reference Method (SRM) color rating
+                                    allOf:
+                                      - $ref: '#/components/schemas/port-config'
                                   pressureAlertClearThresholdA:
                                     type: integer
                                     description: Pressure alert clear threshold for Aux port A in mbar
@@ -1200,7 +954,8 @@ paths:
                           config_readonly:
                             cleanActive: 0
                             connectedWiFiSSID: Main WiFi
-                            fwRev: 20200507
+                            extAdcPresent: 0
+                            fwRev: '20200507'
                             humidity: 67.0665
                             hwRev: 20200101
                             macAddr: 30AEA4CB8768
@@ -1247,10 +1002,16 @@ paths:
                               volStart: 58670
                               offlineKegCount: 0
                             portCount: 2
+                            presA: 0
+                            presB: 0
+                            pressureAPresent: 0
+                            pressureBPresent: 0
                             priWiFiPass: mainStreet
                             priWiFiSSID: Main WiFi
                             serialNum: '2001020345'
                             temp: 8.93477
+                            wifiMode: 0
+                            wifiSuccess: 1
                           online: true
                           ota:
                             id: 867a4c0e6e721e57
@@ -1264,6 +1025,7 @@ paths:
           in: header
           name: content-type
           required: true
+          description: Must be application/json
       description: |-
         Return Device Object
 
@@ -1275,6 +1037,8 @@ paths:
         - If shadow.state.reported.config.portCount < 4, the upper port objects can be ignored
     post:
       summary: Device POST
+      tags:
+        - Device
       operationId: post-m-device
       responses:
         '200':
@@ -1425,277 +1189,21 @@ paths:
                                   type: integer
                                   description: Enable offline alerts
                                 port0:
-                                  type: object
                                   description: Logical port 0 / user port 1
-                                  required:
-                                    - abv
-                                    - beaconEna
-                                    - calOffset
-                                    - drinkSize
-                                    - ibu
-                                    - maker
-                                    - state
-                                    - style
-                                    - tapLabel
-                                    - userDesc
-                                    - userName
-                                    - volSize
-                                  properties:
-                                    abv:
-                                      type: number
-                                      description: Alcohol by volume (%)
-                                    beaconEna:
-                                      type: integer
-                                      description: Port beacon enable
-                                    calOffset:
-                                      type: number
-                                      description: Calibration offset correction (%) applied to each serving
-                                    drinkSize:
-                                      type: number
-                                      description: Default serving size volume (mL) use to estimate remaining servings
-                                    ibu:
-                                      type: integer
-                                      description: International Bitterness Units
-                                    maker:
-                                      type: string
-                                      description: Maker/Producer of beverage
-                                    state:
-                                      type: number
-                                      description: 'Port state: 1 = enabled, 0 = disabled'
-                                    style:
-                                      type: string
-                                      description: Beverage style
-                                    tapLabel:
-                                      type: string
-                                      minLength: 1
-                                      description: Tap handle label (usually a number)
-                                      maxLength: 6
-                                    userDesc:
-                                      type: string
-                                      description: Kegged beverage description
-                                    userName:
-                                      type: string
-                                      minLength: 1
-                                      description: Kegged beverage name
-                                    volSize:
-                                      type: integer
-                                      description: Keg size volume (mL)
-                                    distributor:
-                                      type: string
-                                      description: Beverage distributor name
-                                    kegCost:
-                                      type: number
-                                      description: Cost of keg
-                                    labelUrl:
-                                      type: integer
-                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                    srm:
-                                      type: integer
-                                      description: Standard Reference Method (SRM) color rating
+                                  allOf:
+                                    - $ref: '#/components/schemas/port-config'
                                 port1:
-                                  type: object
                                   description: Logical port 1 / user port 2
-                                  required:
-                                    - abv
-                                    - beaconEna
-                                    - calOffset
-                                    - drinkSize
-                                    - ibu
-                                    - maker
-                                    - state
-                                    - style
-                                    - tapLabel
-                                    - userDesc
-                                    - userName
-                                    - volSize
-                                  properties:
-                                    abv:
-                                      type: number
-                                      description: Alcohol by volume (%)
-                                    beaconEna:
-                                      type: integer
-                                      description: Port beacon enable
-                                    calOffset:
-                                      type: number
-                                      description: Calibration offset correction (%) applied to each serving
-                                    drinkSize:
-                                      type: number
-                                      description: Default serving size volume (mL) use to estimate remaining servings
-                                    ibu:
-                                      type: integer
-                                      description: International Bitterness Units
-                                    maker:
-                                      type: string
-                                      description: Maker/Producer of beverage
-                                    state:
-                                      type: number
-                                      description: 'Port state: 1 = enabled, 0 = disabled'
-                                    style:
-                                      type: string
-                                      description: Beverage style
-                                    tapLabel:
-                                      type: string
-                                      minLength: 1
-                                      description: Tap handle label (usually a number)
-                                      maxLength: 6
-                                    userDesc:
-                                      type: string
-                                      description: Kegged beverage description
-                                    userName:
-                                      type: string
-                                      minLength: 1
-                                      description: Kegged beverage name
-                                    volSize:
-                                      type: integer
-                                      description: Keg size volume (mL)
-                                    distributor:
-                                      type: string
-                                      description: Beverage distributor name
-                                    kegCost:
-                                      type: number
-                                      description: Cost of keg
-                                    labelUrl:
-                                      type: integer
-                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                    srm:
-                                      type: integer
-                                      description: Standard Reference Method (SRM) color rating
+                                  allOf:
+                                    - $ref: '#/components/schemas/port-config'
                                 port2:
-                                  type: object
                                   description: Logical port 2 / user port 3
-                                  required:
-                                    - abv
-                                    - beaconEna
-                                    - calOffset
-                                    - drinkSize
-                                    - ibu
-                                    - maker
-                                    - state
-                                    - style
-                                    - tapLabel
-                                    - userDesc
-                                    - userName
-                                    - volSize
-                                  properties:
-                                    abv:
-                                      type: number
-                                      description: Alcohol by volume (%)
-                                    beaconEna:
-                                      type: integer
-                                      description: Port beacon enable
-                                    calOffset:
-                                      type: number
-                                      description: Calibration offset correction (%) applied to each serving
-                                    drinkSize:
-                                      type: number
-                                      description: Default serving size volume (mL) use to estimate remaining servings
-                                    ibu:
-                                      type: integer
-                                      description: International Bitterness Units
-                                    maker:
-                                      type: string
-                                      description: Maker/Producer of beverage
-                                    state:
-                                      type: number
-                                      description: 'Port state: 1 = enabled, 0 = disabled'
-                                    style:
-                                      type: string
-                                      description: Beverage style
-                                    tapLabel:
-                                      type: string
-                                      minLength: 1
-                                      description: Tap handle label (usually a number)
-                                      maxLength: 6
-                                    userDesc:
-                                      type: string
-                                      description: Kegged beverage description
-                                    userName:
-                                      type: string
-                                      minLength: 1
-                                      description: Kegged beverage name
-                                    volSize:
-                                      type: integer
-                                      description: Keg size volume (mL)
-                                    distributor:
-                                      type: string
-                                      description: Beverage distributor name
-                                    kegCost:
-                                      type: number
-                                      description: Cost of keg
-                                    labelUrl:
-                                      type: integer
-                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                    srm:
-                                      type: integer
-                                      description: Standard Reference Method (SRM) color rating
+                                  allOf:
+                                    - $ref: '#/components/schemas/port-config'
                                 port3:
-                                  type: object
                                   description: Logical port 3 / user port 4
-                                  required:
-                                    - abv
-                                    - beaconEna
-                                    - calOffset
-                                    - drinkSize
-                                    - ibu
-                                    - maker
-                                    - state
-                                    - style
-                                    - tapLabel
-                                    - userDesc
-                                    - userName
-                                    - volSize
-                                  properties:
-                                    abv:
-                                      type: number
-                                      description: Alcohol by volume (%)
-                                    beaconEna:
-                                      type: integer
-                                      description: Port beacon enable
-                                    calOffset:
-                                      type: number
-                                      description: Calibration offset correction (%) applied to each serving
-                                    drinkSize:
-                                      type: number
-                                      description: Default serving size volume (mL) use to estimate remaining servings
-                                    ibu:
-                                      type: integer
-                                      description: International Bitterness Units
-                                    maker:
-                                      type: string
-                                      description: Maker/Producer of beverage
-                                    state:
-                                      type: number
-                                      description: 'Port state: 1 = enabled, 0 = disabled'
-                                    style:
-                                      type: string
-                                      description: Beverage style
-                                    tapLabel:
-                                      type: string
-                                      minLength: 1
-                                      description: Tap handle label (usually a number)
-                                      maxLength: 6
-                                    userDesc:
-                                      type: string
-                                      description: Kegged beverage description
-                                    userName:
-                                      type: string
-                                      minLength: 1
-                                      description: Kegged beverage name
-                                    volSize:
-                                      type: integer
-                                      description: Keg size volume (mL)
-                                    distributor:
-                                      type: string
-                                      description: Beverage distributor name
-                                    kegCost:
-                                      type: number
-                                      description: Cost of keg
-                                    labelUrl:
-                                      type: integer
-                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
-                                    srm:
-                                      type: integer
-                                      description: Standard Reference Method (SRM) color rating
+                                  allOf:
+                                    - $ref: '#/components/schemas/port-config'
                                 pressureAlertClearThresholdA:
                                   type: integer
                                   description: Pressure alert clear threshold for Aux port A in mbar
@@ -1786,7 +1294,7 @@ paths:
           in: header
           name: content-type
           required: true
-          description: ''
+          description: Must be application/json
       description: |-
         Update Device Shadow
 
@@ -1795,7 +1303,8 @@ paths:
   /customer:
     get:
       summary: Customer GET
-      tags: []
+      tags:
+        - Customer
       responses:
         '200':
           description: OK
@@ -1812,24 +1321,9 @@ paths:
                     description: Customer object creation date+time
                   pubkeys:
                     type: object
-                    required:
-                      - key1
-                    properties:
-                      key1:
-                        description: Device 1 public key
-                        type:
-                          - string
-                        nullable: true
-                      key2:
-                        description: Device 2 public key
-                        type:
-                          - string
-                        nullable: true
-                      keyn:
-                        description: Device n public key
-                        type:
-                          - string
-                        nullable: true
+                    description: Map of device IDs to DEVICE_PUBLIC_KEYs
+                    additionalProperties:
+                      type: string
                   token:
                     type: string
                     description: CUSTOMER_KEY
@@ -1858,8 +1352,8 @@ paths:
                     email: user@example.com
                     token: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZz
                     pubkeys:
-                      aAbBcCdDeEfFgGhHiIjJkK: {}
-                      zZyYxXwWvVuUtTsRrQqPpO: {}
+                      aAbBcCdDeEfFgGhHiIjJkK: aAbBcCdDeEfFgGhHiIjJkK
+                      zZyYxXwWvVuUtTsRrQqPpO: zZyYxXwWvVuUtTsRrQqPpO
                     created_at: '2019-12-15T23:30:07.744123249Z'
                     updated_at: '2020-02-22T02:58:12.21228205Z'
       operationId: get-customer2
@@ -1881,6 +1375,8 @@ paths:
     parameters: []
     post:
       summary: Customer POST
+      tags:
+        - Customer
       operationId: post-customer
       responses:
         '200':
@@ -1891,10 +1387,11 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
       requestBody:
         content:
           application/json:
@@ -1921,6 +1418,8 @@ paths:
   /api/v2/m/device/rpc/Kegtron.GetTempHumidity:
     post:
       summary: Get Temperature and Humidity RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.GetTempHumidity
       responses:
         '200':
@@ -1958,13 +1457,16 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
   /api/v2/m/device/rpc/Kegtron.GetWiFiRssi:
     post:
       summary: Get WiFi RSSI RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.GetWiFiRssi
       responses:
         '200':
@@ -1982,13 +1484,16 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
   /api/v2/m/device/rpc/Kegtron.GetVoltage:
     post:
       summary: Get Voltage RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.GetVoltage
       responses:
         '200':
@@ -2006,13 +1511,16 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
   /api/v2/m/device/rpc/Kegtron.CleanMode:
     post:
       summary: Set Cleaning Mode RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.CleanMode
       responses:
         '200':
@@ -2030,10 +1538,11 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
       requestBody:
         content:
           application/json:
@@ -2061,6 +1570,8 @@ paths:
   /api/v2/m/device/rpc/Kegtron.ResetVolume:
     post:
       summary: Reset Volume RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetVolume
       responses:
         '200':
@@ -2079,10 +1590,11 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
       requestBody:
         content:
           application/json:
@@ -2104,6 +1616,8 @@ paths:
   /api/v2/m/device/rpc/Kegtron.ResetKegsServed:
     post:
       summary: Reset Kegs Served RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetKegsServed
       responses:
         '200':
@@ -2119,10 +1633,11 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
       requestBody:
         content:
           application/json:
@@ -2144,6 +1659,8 @@ paths:
   /api/v2/m/device/rpc/Kegtron.UserOverride:
     post:
       summary: User Override RPC POST
+      tags:
+        - RPC
       operationId: post-api-v2-m-device-rpc-Kegtron.UserOverride
       responses:
         '200':
@@ -2161,10 +1678,11 @@ paths:
       parameters:
         - schema:
             type: string
-            default: application-json
+            default: application/json
           in: header
           name: content-type
           required: true
+          description: Must be application/json
       requestBody:
         content:
           application/json:
@@ -2178,22 +1696,19 @@ paths:
                   properties:
                     config_readonly:
                       type: object
-                      required:
-                        - porti
-                      properties:
-                        porti:
-                          type: object
-                          description: 'Port number, e.g. port0, port1...'
-                          properties:
-                            dateTapped:
-                              type: string
-                              description: Date Format yyyy/mm/dd
-                            dateCleaned:
-                              type: string
-                              description: Date Format yyyy/mm/dd
-                            volStart:
-                              type: integer
-                              description: Keg starting volume in mL
+                      description: 'Keyed by port name, e.g. port0, port1...'
+                      additionalProperties:
+                        type: object
+                        properties:
+                          dateTapped:
+                            type: string
+                            description: Date Format yyyy/mm/dd
+                          dateCleaned:
+                            type: string
+                            description: Date Format yyyy/mm/dd
+                          volStart:
+                            type: integer
+                            description: Keg starting volume in mL
               required:
                 - state
             examples:
@@ -2207,6 +1722,8 @@ paths:
   /api/v2/m/device/data/telemetry-device:
     post:
       summary: Telemetry-Device POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-telemetry-device
       responses:
         '200':
@@ -2247,7 +1764,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2280,6 +1797,8 @@ paths:
   /api/v2/m/device/data/alerts-port:
     post:
       summary: Alerts-Port POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-alerts-port
       responses:
         '200':
@@ -2322,7 +1841,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2357,6 +1876,8 @@ paths:
   /api/v2/m/device/data/alerts-device:
     post:
       summary: Alerts-Device POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-alerts-device
       responses:
         '200':
@@ -2399,7 +1920,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2432,6 +1953,8 @@ paths:
   /api/v2/m/device/data/servings-port:
     post:
       summary: Servings-Port POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-servings-port
       responses:
         '200':
@@ -2480,7 +2003,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2516,6 +2039,8 @@ paths:
   /api/v2/m/device/data/servings-device:
     post:
       summary: Servings-Device POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-servings-device
       responses:
         '200':
@@ -2564,7 +2089,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2597,6 +2122,8 @@ paths:
   /api/v2/m/device/data/servings-site:
     post:
       summary: Servings-Site POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-servings-site
       responses:
         '200':
@@ -2649,7 +2176,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2685,6 +2212,8 @@ paths:
   /api/v2/m/device/data/servings-all:
     post:
       summary: Servings-All POST
+      tags:
+        - Data
       operationId: post-api-v2-m-device-data-servings-all
       responses:
         '200':
@@ -2737,7 +2266,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -2772,7 +2301,8 @@ paths:
   /api/v2/m/device/rpc/Kegtron.ManServUpdate:
     post:
       summary: Manual Serving Update POST
-      tags: []
+      tags:
+        - RPC
       responses:
         '200':
           description: OK
@@ -2787,7 +2317,7 @@ paths:
           in: header
           name: Content-Type
           required: true
-          description: ''
+          description: Must be application/json
       requestBody:
         content:
           application/json:
@@ -2827,25 +2357,38 @@ components:
       title: port-config
       type: object
       description: Port-specific configuration parameters
+      required:
+        - abv
+        - beaconEna
+        - calOffset
+        - drinkSize
+        - ibu
+        - maker
+        - state
+        - style
+        - tapLabel
+        - userDesc
+        - userName
+        - volSize
       properties:
         abv:
           type: number
-          description: Alcohol By Volume value % rating
+          description: Alcohol by volume (%)
         beaconEna:
           type: integer
-          description: Enable flashing beacon for this port
+          description: Port beacon enable
         calOffset:
           type: number
-          description: Calibration offset %
+          description: Calibration offset correction (%) applied to each serving
         distributor:
           type: string
           description: Beverage distributor name
         drinkSize:
-          type: integer
-          description: Serving volume in mL. Used for servings remaining estimation.
+          type: number
+          description: Default serving size volume (mL) used to estimate remaining servings
         ibu:
           type: integer
-          description: International Bittering Units rating
+          description: International Bitterness Units
         kegCost:
           type: number
           description: Cost of keg
@@ -2854,28 +2397,29 @@ components:
           description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
         maker:
           type: string
-          description: 'Beverage manufacturer (e.g. brewery, winery, etc.)'
+          description: Maker/Producer of beverage
         srm:
           type: integer
-          description: Standard Reference Method (SRM) value describing color of beverage
+          description: Standard Reference Method (SRM) color rating
         state:
           type: integer
-          description: 'Port state: 1 - online, 0 - offline'
+          description: 'Port state: 1 = enabled, 0 = disabled'
         style:
           type: string
-          description: 'Description of beverage classification (e.g. Pilsner, Merlot, etc.)'
+          description: Beverage style
         tapLabel:
           type: string
-          description: Customer tap handle label (usually a number)
+          maxLength: 6
+          description: Tap handle label (usually a number)
         userDesc:
           type: string
-          description: User description of keg attached to this port
+          description: Kegged beverage description
         userName:
           type: string
-          description: User name of keg attached to this port
+          description: Kegged beverage name
         volSize:
           type: integer
-          description: Keg volume in mL
+          description: Keg size volume (mL)
       x-examples: {}
   securitySchemes:
     DEVICE_PUBLIC_KEY:

@@ -1,1 +1,5 @@
+# macOS
+.DS_Store
 
+# Cloudflare Workers local state
+.wrangler/
