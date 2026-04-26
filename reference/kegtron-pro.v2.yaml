@@ -26,6 +26,7 @@ paths:
                   id:
                     type: string
                     minLength: 1
+                    description: Device identifier
                   shadow:
                     type: object
                     required:
@@ -122,7 +123,7 @@ paths:
                                   alertEmail:
                                     type: string
                                     minLength: 1
-                                    description: Destination email adddress(es) for alerts. Multiple addresses must be comma separated.
+                                    description: Destination email address(es) for alerts. Multiple addresses must be comma separated.
                                   alertSmsToNumber:
                                     type: string
                                     minLength: 1
@@ -229,7 +230,7 @@ paths:
                                     description: Enable keg level low threshold SMS alerts
                                   offlineAlertEna:
                                     type: integer
-                                    description: Enable offlline alerts
+                                    description: Enable offline alerts
                                   port0:
                                     type: object
                                     description: Logical port 0 / user port 1
@@ -264,7 +265,7 @@ paths:
                                         description: International Bitterness Units
                                       maker:
                                         type: string
-                                        description: Maker/Producer of bevergage
+                                        description: Maker/Producer of beverage
                                       state:
                                         type: number
                                         description: 'Port state: 1 = enabled, 0 = disabled'
@@ -286,6 +287,18 @@ paths:
                                       volSize:
                                         type: integer
                                         description: Keg size volume (mL)
+                                      distributor:
+                                        type: string
+                                        description: Beverage distributor name
+                                      kegCost:
+                                        type: number
+                                        description: Cost of keg
+                                      labelUrl:
+                                        type: integer
+                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                      srm:
+                                        type: integer
+                                        description: Standard Reference Method (SRM) color rating
                                   port1:
                                     type: object
                                     description: Logical port 1 / user port 2
@@ -320,7 +333,7 @@ paths:
                                         description: International Bitterness Units
                                       maker:
                                         type: string
-                                        description: Maker/Producer of bevergage
+                                        description: Maker/Producer of beverage
                                       state:
                                         type: number
                                         description: 'Port state: 1 = enabled, 0 = disabled'
@@ -342,6 +355,18 @@ paths:
                                       volSize:
                                         type: integer
                                         description: Keg size volume (mL)
+                                      distributor:
+                                        type: string
+                                        description: Beverage distributor name
+                                      kegCost:
+                                        type: number
+                                        description: Cost of keg
+                                      labelUrl:
+                                        type: integer
+                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                      srm:
+                                        type: integer
+                                        description: Standard Reference Method (SRM) color rating
                                   port2:
                                     type: object
                                     description: Logical port 2 / user port 3
@@ -376,7 +401,7 @@ paths:
                                         description: International Bitterness Units
                                       maker:
                                         type: string
-                                        description: Maker/Producer of bevergage
+                                        description: Maker/Producer of beverage
                                       state:
                                         type: number
                                         description: 'Port state: 1 = enabled, 0 = disabled'
@@ -398,6 +423,18 @@ paths:
                                       volSize:
                                         type: integer
                                         description: Keg size volume (mL)
+                                      distributor:
+                                        type: string
+                                        description: Beverage distributor name
+                                      kegCost:
+                                        type: number
+                                        description: Cost of keg
+                                      labelUrl:
+                                        type: integer
+                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                      srm:
+                                        type: integer
+                                        description: Standard Reference Method (SRM) color rating
                                   port3:
                                     type: object
                                     description: Logical port 3 / user port 4
@@ -432,7 +469,7 @@ paths:
                                         description: International Bitterness Units
                                       maker:
                                         type: string
-                                        description: Maker/Producer of bevergage
+                                        description: Maker/Producer of beverage
                                       state:
                                         type: number
                                         description: 'Port state: 1 = enabled, 0 = disabled'
@@ -454,6 +491,18 @@ paths:
                                       volSize:
                                         type: integer
                                         description: Keg size volume (mL)
+                                      distributor:
+                                        type: string
+                                        description: Beverage distributor name
+                                      kegCost:
+                                        type: number
+                                        description: Cost of keg
+                                      labelUrl:
+                                        type: integer
+                                        description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                      srm:
+                                        type: integer
+                                        description: Standard Reference Method (SRM) color rating
                                   pressureAlertClearThresholdA:
                                     type: integer
                                     description: Pressure alert clear threshold for Aux port A in mbar
@@ -480,7 +529,7 @@ paths:
                                     description: Enable SMS pressure alerts
                                   pressureAlertSoakPeriod:
                                     type: integer
-                                    description: Pressure alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
+                                    description: Pressure alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consecutive seconds.
                                   pressureTypeA:
                                     type: integer
                                     description: 'Aux port A pressure sensor type: 0 - low pressure, 1 - high pressure'
@@ -519,7 +568,7 @@ paths:
                                     description: Enable SMS temperature alerts
                                   tempAlertSoakPeriod:
                                     type: integer
-                                    description: Temperature alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
+                                    description: Temperature alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consecutive seconds.
                                   tempOffset:
                                     type: number
                                     description: 'Temperature offset. This value is added to the raw sensor value to calculate config_readonly.temp '
@@ -622,16 +671,19 @@ paths:
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
                                         type: integer
-                                        description: Volume (mL) of most resent serving
+                                        description: Volume (mL) of most recent serving
                                       pulseCnt:
                                         type: integer
-                                        description: Total number of flow meter pulses accummulated since last keg volume reset
+                                        description: Total number of flow meter pulses accumulated since last keg volume reset
                                       volDisp:
                                         type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
                                         type: integer
                                         description: Starting fill volume (mL) of keg when tapped
+                                      offlineKegCount:
+                                        type: integer
+                                        description: Number of on-deck (backup) kegs queued for this port
                                   port1:
                                     type: object
                                     description: Logical port 1 / user port 2
@@ -659,16 +711,19 @@ paths:
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
                                         type: integer
-                                        description: Volume (mL) of most resent serving
+                                        description: Volume (mL) of most recent serving
                                       pulseCnt:
                                         type: integer
-                                        description: Total number of flow meter pulses accummulated since last keg volume reset
+                                        description: Total number of flow meter pulses accumulated since last keg volume reset
                                       volDisp:
                                         type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
                                         type: integer
                                         description: Starting fill volume (mL) of keg when tapped
+                                      offlineKegCount:
+                                        type: integer
+                                        description: Number of on-deck (backup) kegs queued for this port
                                   port2:
                                     type: object
                                     description: Logical port 2 / user port 3
@@ -696,16 +751,19 @@ paths:
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
                                         type: integer
-                                        description: Volume (mL) of most resent serving
+                                        description: Volume (mL) of most recent serving
                                       pulseCnt:
                                         type: integer
-                                        description: Total number of flow meter pulses accummulated since last keg volume reset
+                                        description: Total number of flow meter pulses accumulated since last keg volume reset
                                       volDisp:
                                         type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
                                         type: integer
                                         description: Starting fill volume (mL) of keg when tapped
+                                      offlineKegCount:
+                                        type: integer
+                                        description: Number of on-deck (backup) kegs queued for this port
                                   port3:
                                     type: object
                                     description: Logical port 3 / user port 4
@@ -733,16 +791,19 @@ paths:
                                         description: Total number of kegs served since last ResetKegsServed RPC call
                                       lastServing:
                                         type: integer
-                                        description: Volume (mL) of most resent serving
+                                        description: Volume (mL) of most recent serving
                                       pulseCnt:
                                         type: integer
-                                        description: Total number of flow meter pulses accummulated since last keg volume reset
+                                        description: Total number of flow meter pulses accumulated since last keg volume reset
                                       volDisp:
                                         type: integer
                                         description: Volume (mL) dispensed from keg since last keg volume reset
                                       volStart:
                                         type: integer
                                         description: Starting fill volume (mL) of keg when tapped
+                                      offlineKegCount:
+                                        type: integer
+                                        description: Number of on-deck (backup) kegs queued for this port
                                   portCount:
                                     type: integer
                                     description: Keg monitor port count
@@ -857,6 +918,10 @@ paths:
                               userDesc: Don't let the smooth taste fool ya
                               userName: King Cobra
                               volSize: 58670
+                              distributor: Midwest Beverages
+                              kegCost: 89.99
+                              labelUrl: 0
+                              srm: 4
                             port1:
                               abv: 4.6
                               beaconEna: 0
@@ -870,6 +935,10 @@ paths:
                               userDesc: Tastes as great as its name
                               userName: Old Milwaukee
                               volSize: 58670
+                              distributor: Midwest Beverages
+                              kegCost: 75.00
+                              labelUrl: 0
+                              srm: 3
                             port2:
                               abv: 4.6
                               beaconEna: 0
@@ -883,6 +952,10 @@ paths:
                               userDesc: The beer that made Milwaukee famous
                               userName: Schlitz
                               volSize: 29340
+                              distributor: City Distributors
+                              kegCost: 65.00
+                              labelUrl: 0
+                              srm: 3
                             port3:
                               abv: 5.9
                               beaconEna: 0
@@ -896,6 +969,10 @@ paths:
                               userDesc: The King of Malt Liquor
                               userName: Olde English 800
                               volSize: 58670
+                              distributor: City Distributors
+                              kegCost: 79.99
+                              labelUrl: 0
+                              srm: 6
                             pressureAlertClearThresholdA: 140
                             pressureAlertClearThresholdB: 140
                             pressureAlertEmailEna: 1
@@ -940,6 +1017,7 @@ paths:
                               pulseCnt: 3075
                               volDisp: 6934
                               volStart: 10376
+                              offlineKegCount: 1
                             port1:
                               dateCleaned: 2020/02/15
                               dateTapped: 2020/03/10
@@ -949,6 +1027,7 @@ paths:
                               pulseCnt: 6862
                               volDisp: 15287
                               volStart: 58670
+                              offlineKegCount: 0
                             port2:
                               dateCleaned: 2020/02/05
                               dateTapped: 2020/03/20
@@ -958,6 +1037,7 @@ paths:
                               pulseCnt: 5032
                               volDisp: 10650
                               volStart: 29340
+                              offlineKegCount: 0
                             port3:
                               dateCleaned: 2020/02/28
                               dateTapped: 2020/04/14
@@ -967,6 +1047,7 @@ paths:
                               pulseCnt: 9682
                               volDisp: 20481
                               volStart: 58670
+                              offlineKegCount: 0
                             portCount: 4
                             presA: 1840
                             presB: 44000
@@ -1036,6 +1117,10 @@ paths:
                               userDesc: It works every time
                               userName: Colt 45
                               volSize: 58670
+                              distributor: National Beverage Co.
+                              kegCost: 89.99
+                              labelUrl: 0
+                              srm: 4
                             port1:
                               abv: 4.7
                               beaconEna: 0
@@ -1049,6 +1134,10 @@ paths:
                               userDesc: From the land of sky blue waters
                               userName: Hamms
                               volSize: 58670
+                              distributor: National Beverage Co.
+                              kegCost: 72.00
+                              labelUrl: 0
+                              srm: 3
                             port2:
                               abv: 0
                               beaconEna: 0
@@ -1062,6 +1151,10 @@ paths:
                               userDesc: ''
                               userName: ''
                               volSize: 58670
+                              distributor: ''
+                              kegCost: 0
+                              labelUrl: 0
+                              srm: 0
                             port3:
                               abv: 0
                               beaconEna: 0
@@ -1075,6 +1168,10 @@ paths:
                               userDesc: ''
                               userName: ''
                               volSize: 58670
+                              distributor: ''
+                              kegCost: 0
+                              labelUrl: 0
+                              srm: 0
                             pressureAlertClearThresholdA: 140
                             pressureAlertClearThresholdB: 140
                             pressureAlertEmailEna: 1
@@ -1118,6 +1215,7 @@ paths:
                               pulseCnt: 3075
                               volDisp: 6934
                               volStart: 10376
+                              offlineKegCount: 0
                             port1:
                               dateCleaned: 2020/02/15
                               dateTapped: 2020/03/10
@@ -1127,6 +1225,7 @@ paths:
                               pulseCnt: 6862
                               volDisp: 15287
                               volStart: 58670
+                              offlineKegCount: 0
                             port2:
                               dateCleaned: ''
                               dateTapped: ''
@@ -1136,6 +1235,7 @@ paths:
                               pulseCnt: 0
                               volDisp: 0
                               volStart: 58670
+                              offlineKegCount: 0
                             port3:
                               dateCleaned: ''
                               dateTapped: ''
@@ -1145,6 +1245,7 @@ paths:
                               pulseCnt: 0
                               volDisp: 0
                               volStart: 58670
+                              offlineKegCount: 0
                             portCount: 2
                             priWiFiPass: mainStreet
                             priWiFiSSID: Main WiFi
@@ -1215,7 +1316,7 @@ paths:
                                 alertEmail:
                                   type: string
                                   minLength: 1
-                                  description: Destination email adddress(es) for alerts. Multiple addresses must be comma separated.
+                                  description: Destination email address(es) for alerts. Multiple addresses must be comma separated.
                                 alertSmsToNumber:
                                   type: string
                                   minLength: 1
@@ -1322,7 +1423,7 @@ paths:
                                   description: Enable keg level low threshold SMS alerts
                                 offlineAlertEna:
                                   type: integer
-                                  description: Enable offlline alerts
+                                  description: Enable offline alerts
                                 port0:
                                   type: object
                                   description: Logical port 0 / user port 1
@@ -1357,7 +1458,7 @@ paths:
                                       description: International Bitterness Units
                                     maker:
                                       type: string
-                                      description: Maker/Producer of bevergage
+                                      description: Maker/Producer of beverage
                                     state:
                                       type: number
                                       description: 'Port state: 1 = enabled, 0 = disabled'
@@ -1379,6 +1480,18 @@ paths:
                                     volSize:
                                       type: integer
                                       description: Keg size volume (mL)
+                                    distributor:
+                                      type: string
+                                      description: Beverage distributor name
+                                    kegCost:
+                                      type: number
+                                      description: Cost of keg
+                                    labelUrl:
+                                      type: integer
+                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                    srm:
+                                      type: integer
+                                      description: Standard Reference Method (SRM) color rating
                                 port1:
                                   type: object
                                   description: Logical port 1 / user port 2
@@ -1413,7 +1526,7 @@ paths:
                                       description: International Bitterness Units
                                     maker:
                                       type: string
-                                      description: Maker/Producer of bevergage
+                                      description: Maker/Producer of beverage
                                     state:
                                       type: number
                                       description: 'Port state: 1 = enabled, 0 = disabled'
@@ -1435,6 +1548,18 @@ paths:
                                     volSize:
                                       type: integer
                                       description: Keg size volume (mL)
+                                    distributor:
+                                      type: string
+                                      description: Beverage distributor name
+                                    kegCost:
+                                      type: number
+                                      description: Cost of keg
+                                    labelUrl:
+                                      type: integer
+                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                    srm:
+                                      type: integer
+                                      description: Standard Reference Method (SRM) color rating
                                 port2:
                                   type: object
                                   description: Logical port 2 / user port 3
@@ -1469,7 +1594,7 @@ paths:
                                       description: International Bitterness Units
                                     maker:
                                       type: string
-                                      description: Maker/Producer of bevergage
+                                      description: Maker/Producer of beverage
                                     state:
                                       type: number
                                       description: 'Port state: 1 = enabled, 0 = disabled'
@@ -1491,6 +1616,18 @@ paths:
                                     volSize:
                                       type: integer
                                       description: Keg size volume (mL)
+                                    distributor:
+                                      type: string
+                                      description: Beverage distributor name
+                                    kegCost:
+                                      type: number
+                                      description: Cost of keg
+                                    labelUrl:
+                                      type: integer
+                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                    srm:
+                                      type: integer
+                                      description: Standard Reference Method (SRM) color rating
                                 port3:
                                   type: object
                                   description: Logical port 3 / user port 4
@@ -1525,7 +1662,7 @@ paths:
                                       description: International Bitterness Units
                                     maker:
                                       type: string
-                                      description: Maker/Producer of bevergage
+                                      description: Maker/Producer of beverage
                                     state:
                                       type: number
                                       description: 'Port state: 1 = enabled, 0 = disabled'
@@ -1547,6 +1684,18 @@ paths:
                                     volSize:
                                       type: integer
                                       description: Keg size volume (mL)
+                                    distributor:
+                                      type: string
+                                      description: Beverage distributor name
+                                    kegCost:
+                                      type: number
+                                      description: Cost of keg
+                                    labelUrl:
+                                      type: integer
+                                      description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
+                                    srm:
+                                      type: integer
+                                      description: Standard Reference Method (SRM) color rating
                                 pressureAlertClearThresholdA:
                                   type: integer
                                   description: Pressure alert clear threshold for Aux port A in mbar
@@ -1573,7 +1722,7 @@ paths:
                                   description: Enable SMS pressure alerts
                                 pressureAlertSoakPeriod:
                                   type: integer
-                                  description: Pressure alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
+                                  description: Pressure alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consecutive seconds.
                                 pressureTypeA:
                                   type: integer
                                   description: 'Aux port A pressure sensor type: 0 - low pressure, 1 - high pressure'
@@ -1612,7 +1761,7 @@ paths:
                                   description: Enable SMS temperature alerts
                                 tempAlertSoakPeriod:
                                   type: integer
-                                  description: Temperature alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consective seconds.
+                                  description: Temperature alert soak period in seconds. Alert asserted if pressure value crosses threshold for x consecutive seconds.
                                 tempOffset:
                                   type: number
                                   description: 'Temperature offset. This value is added to the raw sensor value to calculate config_readonly.temp '
@@ -1704,13 +1853,13 @@ paths:
               examples:
                 'Example: Customer with two devices':
                   value:
-                    id: 2SIK4J8MhccQsflmaQP4d54
-                    app_id: UCzqkgYtz91FnYAIo0uulaA
+                    id: xXxXxXxXxXxXxXxXxXxXxXx
+                    app_id: yYyYyYyYyYyYyYyYyYyYyYy
                     email: user@example.com
-                    token: pKPaC1kTQ8leL3ejsY4PkFi1uYyJfAEbfjhrXpmNgsGGCgmFM8q9n
+                    token: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZz
                     pubkeys:
-                      LKueHqA7xsR68tdYgv4JpO: {}
-                      wgpxg9Y0PQjE8U7ZNGfz9v: {}
+                      aAbBcCdDeEfFgGhHiIjJkK: {}
+                      zZyYxXwWvVuUtTsRrQqPpO: {}
                     created_at: '2019-12-15T23:30:07.744123249Z'
                     updated_at: '2020-02-22T02:58:12.21228205Z'
       operationId: get-customer2
@@ -1798,7 +1947,7 @@ paths:
                     temp: 24.0311
                     humidity: 56.849
       description: |-
-        This remote procedure call (RPC) fetches the current temperature and humidity of the keg monitor device. It does not report temp/humdidity for specific ports.
+        This remote procedure call (RPC) fetches the current temperature and humidity of the keg monitor device. It does not report temp/humidity for specific ports.
 
         When called, the following shadow values are updated:
 
@@ -1827,7 +1976,31 @@ paths:
               examples:
                 Example:
                   value: -47
-      description: This remote procedure call (RPC) fetches the current WiFi Recevied Signal Strength Indicator (RSSI) as seen by the device. Larger values correspond to stronger signal strength (e.g. -30 is very good whereas -80 is very poor).
+      description: This remote procedure call (RPC) fetches the current WiFi Received Signal Strength Indicator (RSSI) as seen by the device. Larger values correspond to stronger signal strength (e.g. -30 is very good whereas -80 is very poor).
+      security:
+        - DEVICE_PUBLIC_KEY: []
+      parameters:
+        - schema:
+            type: string
+            default: application-json
+          in: header
+          name: content-type
+          required: true
+  /api/v2/m/device/rpc/Kegtron.GetVoltage:
+    post:
+      summary: Get Voltage RPC POST
+      operationId: post-api-v2-m-device-rpc-Kegtron.GetVoltage
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+              examples:
+                Example:
+                  value: 12.04
+      description: This remote procedure call (RPC) fetches the current DC input voltage of the keg monitor device. Useful for verifying power supply health.
       security:
         - DEVICE_PUBLIC_KEY: []
       parameters:
@@ -1893,7 +2066,7 @@ paths:
         '200':
           description: 'true'
       description: |-
-        This remote procedure call (RPC) initiates a keg volume reset on the target device for the specificed port. 
+        This remote procedure call (RPC) initiates a keg volume reset on the target device for the specified port. 
 
         When called, the following shadow values are updated as shown:
 
@@ -1936,7 +2109,7 @@ paths:
         '200':
           description: 'true'
       description: |
-        This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specificed port. 
+        This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specified port. 
 
         When called, the following shadow value is updated as shown:
 
@@ -1976,7 +2149,7 @@ paths:
         '200':
           description: 'true'
       description: |
-        This remote procedure call (RPC) initiates user-iniated overrides of specific shadow values on the target device for the specificed port. This method is used to prevent contention with firmware which can autonomously update these values.
+        This remote procedure call (RPC) initiates user-initiated overrides of specific shadow values on the target device for the specified port. This method is used to prevent contention with firmware which can autonomously update these values.
 
         The following values can be updated via this RPC:
 
@@ -2038,7 +2211,35 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'Query telemetry for one specfic device. '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of telemetry records. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when data was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] temperature (number) - Ambient temperature in degrees C (or F if displayUnits=1)
+                      [5] humidity (number) - Relative humidity percentage
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T14:00:00Z'
+                        - '2026-04-01T07:00:00'
+                        - Moe's Tavern
+                        - device2
+                        - 4.2
+                        - 68.5
+      description: 'Query telemetry for one specific device. '
       parameters:
         - schema:
             type: string
@@ -2083,7 +2284,37 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'Query alerts for one specfic device port. '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of alert records. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when alert was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] port_number (integer) - Port number (0-indexed)
+                      [5] alert_type (integer) - Alert type code
+                      [6] alert_message (string) - JSON-encoded object; parse to access the .name field containing the alert description
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T14:00:00Z'
+                        - '2026-04-01T07:00:00'
+                        - Moe's Tavern
+                        - device2
+                        - 0
+                        - 2
+                        - '{"name":"Keg level low"}'
+      description: 'Query alerts for one specific device port. '
       parameters:
         - schema:
             type: string
@@ -2130,7 +2361,37 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'Query alerts for all ports on one specfic device. '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of alert records for all ports on the device. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when alert was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] port_number (integer) - Port number (0-indexed)
+                      [5] alert_type (integer) - Alert type code
+                      [6] alert_message (string) - JSON-encoded object; parse to access the .name field containing the alert description
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T14:00:00Z'
+                        - '2026-04-01T07:00:00'
+                        - Moe's Tavern
+                        - device2
+                        - 1
+                        - 1
+                        - '{"name":"Temperature high"}'
+      description: 'Query alerts for all ports on one specific device. '
       parameters:
         - schema:
             type: string
@@ -2175,7 +2436,43 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'Query servings for one specfic device port. '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of serving records for the specified port. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] port_number (integer) - Port number (0-indexed)
+                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
+                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
+                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
+                      [8] keg_name (string) - Beverage name (userName) at time of serving
+                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T21:05:00Z'
+                        - '2026-04-01T14:05:00'
+                        - Moe's Tavern
+                        - device2
+                        - 0
+                        - 473
+                        - 7407
+                        - 88.6
+                        - King Cobra
+                        - 8200
+      description: 'Query servings for one specific device port. '
       parameters:
         - schema:
             type: string
@@ -2223,7 +2520,43 @@ paths:
       responses:
         '200':
           description: OK
-      description: 'Query servings for all ports on one specfic device. '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of serving records for all ports on the device. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] port_number (integer) - Port number (0-indexed)
+                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
+                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
+                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
+                      [8] keg_name (string) - Beverage name (userName) at time of serving
+                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T21:05:00Z'
+                        - '2026-04-01T14:05:00'
+                        - Moe's Tavern
+                        - device2
+                        - 0
+                        - 473
+                        - 7407
+                        - 88.6
+                        - King Cobra
+                        - 8200
+      description: 'Query servings for all ports on one specific device. '
       parameters:
         - schema:
             type: string
@@ -2268,8 +2601,44 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of serving records for all ports and devices at the specified site. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] port_number (integer) - Port number (0-indexed)
+                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
+                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
+                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
+                      [8] keg_name (string) - Beverage name (userName) at time of serving
+                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T21:05:00Z'
+                        - '2026-04-01T14:05:00'
+                        - Moe's Tavern
+                        - device2
+                        - 0
+                        - 473
+                        - 7407
+                        - 88.6
+                        - King Cobra
+                        - 8200
       description: |-
-        Query servings for all ports and all devices for a specfic site. 
+        Query servings for all ports and all devices for a specific site.
 
         **NOTE:**
         The access_token can be any DEVICE_PUBLIC_KEY (pubkey) from any device associated with the target site.
@@ -2293,7 +2662,7 @@ paths:
               properties:
                 params:
                   type: array
-                  description: '["StartDateTime", "EndDateTime"]'
+                  description: '["SiteName", "StartDateTime", "EndDateTime"]'
                   items:
                     type: string
             examples:
@@ -2320,6 +2689,42 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    description: |-
+                      Array of serving records for all ports, devices and sites associated with the customer. Each row is an ordered array with the following columns:
+                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
+                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
+                      [2] site_name (string) - Device site name
+                      [3] device_id (string) - Device identifier
+                      [4] port_number (integer) - Port number (0-indexed)
+                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
+                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
+                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
+                      [8] keg_name (string) - Beverage name (userName) at time of serving
+                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                    items:
+                      type: array
+                      items: {}
+              examples:
+                Example:
+                  value:
+                    rows:
+                      - - '2026-04-01T21:05:00Z'
+                        - '2026-04-01T14:05:00'
+                        - Moe's Tavern
+                        - device2
+                        - 0
+                        - 473
+                        - 7407
+                        - 88.6
+                        - King Cobra
+                        - 8200
       description: |-
         Query servings for all ports, devices and sites associated with a customer.
 
@@ -2432,6 +2837,9 @@ components:
         calOffset:
           type: number
           description: Calibration offset %
+        distributor:
+          type: string
+          description: Beverage distributor name
         drinkSize:
           type: integer
           description: Serving volume in mL. Used for servings remaining estimation.
@@ -2442,8 +2850,8 @@ components:
           type: number
           description: Cost of keg
         labelUrl:
-          type: string
-          description: Encoded URL of graphic associated with keg
+          type: integer
+          description: 'Untappd beer label encoded as a 64-bit integer. Upper 32 bits contain the hex portion of the Untappd image filename; lower 32 bits contain the decimal portion. 0 = no label set.'
         maker:
           type: string
           description: 'Beverage manufacturer (e.g. brewery, winery, etc.)'
@@ -2461,10 +2869,10 @@ components:
           description: Customer tap handle label (usually a number)
         userDesc:
           type: string
-          description: User name of keg attached to this port
+          description: User description of keg attached to this port
         userName:
           type: string
-          description: User description of keg attached to this port
+          description: User name of keg attached to this port
         volSize:
           type: integer
           description: Keg volume in mL
