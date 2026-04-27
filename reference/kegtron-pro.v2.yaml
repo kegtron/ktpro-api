@@ -1321,9 +1321,12 @@ paths:
                     description: Customer object creation date+time
                   pubkeys:
                     type: object
-                    description: Map of device IDs to DEVICE_PUBLIC_KEYs
+                    description: >-
+                      Map of device IDs to DEVICE_PUBLIC_KEYs. Always use the
+                      map key (device ID) as the access_token — the value may
+                      be an empty object {}.
                     additionalProperties:
-                      type: string
+                      type: object
                   token:
                     type: string
                     description: CUSTOMER_KEY
@@ -1352,8 +1355,8 @@ paths:
                     email: user@example.com
                     token: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZz
                     pubkeys:
-                      aAbBcCdDeEfFgGhHiIjJkK: aAbBcCdDeEfFgGhHiIjJkK
-                      zZyYxXwWvVuUtTsRrQqPpO: zZyYxXwWvVuUtTsRrQqPpO
+                      aAbBcCdDeEfFgGhHiIjJkK: {}
+                      zZyYxXwWvVuUtTsRrQqPpO: {}
                     created_at: '2019-12-15T23:30:07.744123249Z'
                     updated_at: '2020-02-22T02:58:12.21228205Z'
       operationId: get-customer2
