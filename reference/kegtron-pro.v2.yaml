@@ -2013,17 +2013,22 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of serving records for the specified port. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - site name (device siteName)
-                      [3] device_id (string) - device identifier
-                      [4] port_num (integer) - port number, 0-indexed
-                      [5] vol (integer) - serving volume, mL
-                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
-                      [7] level (number) - keg level after the serving, percent
-                      [8] keg_name (string) - beverage name (userName) at time of serving
-                      [9] duration (integer) - serving duration, ms
+                      Array of serving records for the specified port.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the serving, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `port_num` | integer | Port number, 0-indexed |
+                      | 5 | `vol` | integer | Volume of this serving, mL |
+                      | 6 | `disp` | integer | Total volume dispensed from the keg since the last reset, mL |
+                      | 7 | `level` | number | Keg level after this serving, percent (0–100) |
+                      | 8 | `keg_name` | string | Beverage name (`userName`) at the time of the serving |
+                      | 9 | `duration` | integer | Duration of the serving, ms |
                     items:
                       type: array
                       items: {}
@@ -2115,17 +2120,22 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of serving records for all ports on the device. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - site name (device siteName)
-                      [3] device_id (string) - device identifier
-                      [4] port_num (integer) - port number, 0-indexed
-                      [5] vol (integer) - serving volume, mL
-                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
-                      [7] level (number) - keg level after the serving, percent
-                      [8] keg_name (string) - beverage name (userName) at time of serving
-                      [9] duration (integer) - serving duration, ms
+                      Array of serving records for all ports on the device.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the serving, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `port_num` | integer | Port number, 0-indexed |
+                      | 5 | `vol` | integer | Volume of this serving, mL |
+                      | 6 | `disp` | integer | Total volume dispensed from the keg since the last reset, mL |
+                      | 7 | `level` | number | Keg level after this serving, percent (0–100) |
+                      | 8 | `keg_name` | string | Beverage name (`userName`) at the time of the serving |
+                      | 9 | `duration` | integer | Duration of the serving, ms |
                     items:
                       type: array
                       items: {}
@@ -2214,17 +2224,22 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of serving records for all ports and devices at the specified site. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - site name (device siteName)
-                      [3] device_id (string) - device identifier
-                      [4] port_num (integer) - port number, 0-indexed
-                      [5] vol (integer) - serving volume, mL
-                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
-                      [7] level (number) - keg level after the serving, percent
-                      [8] keg_name (string) - beverage name (userName) at time of serving
-                      [9] duration (integer) - serving duration, ms
+                      Array of serving records for all ports and devices at the specified site.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the serving, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `port_num` | integer | Port number, 0-indexed |
+                      | 5 | `vol` | integer | Volume of this serving, mL |
+                      | 6 | `disp` | integer | Total volume dispensed from the keg since the last reset, mL |
+                      | 7 | `level` | number | Keg level after this serving, percent (0–100) |
+                      | 8 | `keg_name` | string | Beverage name (`userName`) at the time of the serving |
+                      | 9 | `duration` | integer | Duration of the serving, ms |
                     items:
                       type: array
                       items: {}
@@ -2320,17 +2335,22 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of serving records for all ports, devices and sites associated with the customer. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - site name (device siteName)
-                      [3] device_id (string) - device identifier
-                      [4] port_num (integer) - port number, 0-indexed
-                      [5] vol (integer) - serving volume, mL
-                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
-                      [7] level (number) - keg level after the serving, percent
-                      [8] keg_name (string) - beverage name (userName) at time of serving
-                      [9] duration (integer) - serving duration, ms
+                      Array of serving records for all ports, devices and sites associated with the customer.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the serving, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `port_num` | integer | Port number, 0-indexed |
+                      | 5 | `vol` | integer | Volume of this serving, mL |
+                      | 6 | `disp` | integer | Total volume dispensed from the keg since the last reset, mL |
+                      | 7 | `level` | number | Keg level after this serving, percent (0–100) |
+                      | 8 | `keg_name` | string | Beverage name (`userName`) at the time of the serving |
+                      | 9 | `duration` | integer | Duration of the serving, ms |
                     items:
                       type: array
                       items: {}
