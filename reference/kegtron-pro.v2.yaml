@@ -1482,17 +1482,15 @@ paths:
       responses:
         '200':
           description: >-
-            OK. Devices on Kegtron's new cloud return `{}` at once: the command
-            is queued and applied when the device next checks in. Devices not
-            yet moved to the new cloud return `true` once the device has
-            applied it.
+            OK. Returns `true` once the command is accepted. On devices on
+            Kegtron's new cloud the command is queued and applied when the
+            device next checks in, usually within seconds.
           content:
             application/json:
-              schema: {}
+              schema:
+                type: boolean
               examples:
-                Queued:
-                  value: {}
-                Applied by device:
+                Example:
                   value: true
       description: |-
         This remote procedure call (RPC) configures the Cleaning Mode for the device.
@@ -1545,17 +1543,15 @@ paths:
       responses:
         '200':
           description: >-
-            OK. Devices on Kegtron's new cloud return `{}` at once: the command
-            is queued and applied when the device next checks in. Devices not
-            yet moved to the new cloud return `true` once the device has
-            applied it.
+            OK. Returns `true` once the command is accepted. On devices on
+            Kegtron's new cloud the command is queued and applied when the
+            device next checks in, usually within seconds.
           content:
             application/json:
-              schema: {}
+              schema:
+                type: boolean
               examples:
-                Queued:
-                  value: {}
-                Applied by device:
+                Example:
                   value: true
       description: |-
         This remote procedure call (RPC) initiates a keg volume reset on the target device for the specified port. 
@@ -1603,17 +1599,15 @@ paths:
       responses:
         '200':
           description: >-
-            OK. Devices on Kegtron's new cloud return `{}` at once: the command
-            is queued and applied when the device next checks in. Devices not
-            yet moved to the new cloud return `true` once the device has
-            applied it.
+            OK. Returns `true` once the command is accepted. On devices on
+            Kegtron's new cloud the command is queued and applied when the
+            device next checks in, usually within seconds.
           content:
             application/json:
-              schema: {}
+              schema:
+                type: boolean
               examples:
-                Queued:
-                  value: {}
-                Applied by device:
+                Example:
                   value: true
       description: |
         This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specified port. 
@@ -1658,17 +1652,15 @@ paths:
       responses:
         '200':
           description: >-
-            OK. Devices on Kegtron's new cloud return `{}` at once: the command
-            is queued and applied when the device next checks in. Devices not
-            yet moved to the new cloud return `true` once the device has
-            applied it.
+            OK. Returns `true` once the command is accepted. On devices on
+            Kegtron's new cloud the command is queued and applied when the
+            device next checks in, usually within seconds.
           content:
             application/json:
-              schema: {}
+              schema:
+                type: boolean
               examples:
-                Queued:
-                  value: {}
-                Applied by device:
+                Example:
                   value: true
       description: |
         This remote procedure call (RPC) initiates user-initiated overrides of specific shadow values on the target device for the specified port. This method is used to prevent contention with firmware which can autonomously update these values.
@@ -1873,7 +1865,7 @@ paths:
                         - 0
                         - 0
                         - '{"name":"Low alert: 18.5%"}'
-      description: "Query alerts for one specific device port. Results are capped at 5,000 rows, newest first; narrow the time range to page through more. Devices on Kegtron's new cloud return no alert rows yet."
+      description: "Query alerts for one specific device port. Results are capped at 5,000 rows, newest first; narrow the time range to page through more."
       parameters:
         - schema:
             type: string
@@ -1970,7 +1962,7 @@ paths:
                         - 1
                         - 9
                         - '{"name":"High temperature alert event"}'
-      description: "Query alerts for all ports on one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more. Devices on Kegtron's new cloud return no alert rows yet."
+      description: "Query alerts for all ports on one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more."
       parameters:
         - schema:
             type: string
@@ -2448,17 +2440,15 @@ paths:
       responses:
         '200':
           description: >-
-            OK. Devices on Kegtron's new cloud return `{}` at once: the command
-            is queued and applied when the device next checks in. Devices not
-            yet moved to the new cloud return `true` once the device has
-            applied it.
+            OK. Returns `true` once the command is accepted. On devices on
+            Kegtron's new cloud the command is queued and applied when the
+            device next checks in, usually within seconds.
           content:
             application/json:
-              schema: {}
+              schema:
+                type: boolean
               examples:
-                Queued:
-                  value: {}
-                Applied by device:
+                Example:
                   value: true
       operationId: post-api-v2-m-device-rpc-Kegtron.ManServUpdate
       description: This remote procedure call (RPC) manually adds an entry to the 'servings' database table. Servings can be positive or negative values. A negative value may be used to 'undo' an existing serving that was recorded by mistake.
