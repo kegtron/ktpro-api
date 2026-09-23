@@ -1744,13 +1744,18 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of telemetry records. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the reading (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - device site name
-                      [3] device_id (string) - device identifier
-                      [4] temp (number) - ambient temperature, °C. Can be 0 when the device has no sensor fitted.
-                      [5] humidity (number) - relative humidity, %. Can be 0 when the device has no sensor fitted.
+                      Array of telemetry records.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the reading, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `temp` | number | Ambient temperature, °C. `0` when the device has no sensor fitted. |
+                      | 5 | `humidity` | number | Relative humidity, %. `0` when the device has no sensor fitted. |
                     items:
                       type: array
                       items: {}
@@ -1831,14 +1836,19 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of alert records. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the alert (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - device site name
-                      [3] device_id (string) - device identifier
-                      [4] port_num (integer) - port number, 0-indexed
-                      [5] type (integer) - alert type code
-                      [6] message (string) - JSON-encoded string, e.g. "{\"name\":\"Keg volume auto reset\"}"
+                      Array of alert records.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the alert, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `port_num` | integer | Port number, 0-indexed |
+                      | 5 | `type` | integer | Alert type code |
+                      | 6 | `message` | string | JSON-encoded string, e.g. `{"name":"Keg volume auto reset"}` |
                     items:
                       type: array
                       items: {}
@@ -1923,14 +1933,19 @@ paths:
                   rows:
                     type: array
                     description: |-
-                      Array of alert records for all ports on the device. Each row is an ordered array with the following columns:
-                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the alert (device clock when synced, otherwise cloud receipt time)
-                      [1] customer_id (string) - account identifier
-                      [2] site_id (string) - device site name
-                      [3] device_id (string) - device identifier
-                      [4] port_num (integer) - port number, 0-indexed
-                      [5] type (integer) - alert type code
-                      [6] message (string) - JSON-encoded string, e.g. "{\"name\":\"Keg volume auto reset\"}"
+                      Array of alert records for all ports on the device.
+
+                      Each row is an ordered array; the column order matches `names`.
+
+                      | Index | Column | Type | Description |
+                      |---|---|---|---|
+                      | 0 | `timestamp` | string | Time of the alert, UTC, formatted `YYYY-MM-DD HH:MM:SS` (device clock when synced, otherwise cloud receipt time) |
+                      | 1 | `customer_id` | string | Account identifier |
+                      | 2 | `site_id` | string | Site name (the device's `siteName`) |
+                      | 3 | `device_id` | string | Device identifier |
+                      | 4 | `port_num` | integer | Port number, 0-indexed |
+                      | 5 | `type` | integer | Alert type code |
+                      | 6 | `message` | string | JSON-encoded string, e.g. `{"name":"Keg volume auto reset"}` |
                     items:
                       type: array
                       items: {}
