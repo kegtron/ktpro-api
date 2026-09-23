@@ -26,24 +26,34 @@ All messages are JSON objects with the following fields:
 |--------|-----------|----------------|
 | `online` | Device connects to the cloud | none |
 | `offline` | Device disconnects from the cloud | none |
-| `updated` | Device shadow state changes | Updated shadow keys (see below) |
+| `updated` | Device shadow state changes | The full Device GET object (see below) |
 | `rpc.in.<method>` | An RPC call is dispatched to the device | RPC request arguments |
 | `rpc.out.<method>` | The device responds to an RPC call | RPC response value |
 
+Devices on Kegtron's new cloud send only `updated` frames; a change in connection status arrives as an `updated` frame with `online` set accordingly.
+
 ### The `updated` notification
 
-This is the most useful notification for live monitoring. It fires whenever the device reports new state — including after every serving. The `data` field contains only the keys that changed, in the same shape as the Device GET response.
+This is the most useful notification for live monitoring. It fires whenever the device reports new state — including after every serving. The `data` field is the device's complete current state — exactly the object the Device GET endpoint returns — not just the keys that changed.
 
-Example: after a pour on port 0, you would receive something like:
+Example: after a pour on port 0 you receive a frame like this (trimmed here; `data` carries every key Device GET returns):
 
 ```json
 {
-  "name": "updated",
   "id": "device2",
+  "name": "updated",
   "data": {
+    "id": "device2",
     "shadow": {
       "state": {
         "reported": {
+          "config": {
+            "siteName": "Moe's Tavern",
+            "port0": {
+              "userName": "King Cobra",
+              "volSize": 58670
+            }
+          },
           "config_readonly": {
             "port0": {
               "lastServing": 473,
@@ -52,6 +62,10 @@ Example: after a pour on port 0, you would receive something like:
             },
             "temp": 4.1,
             "humidity": 67.2
+          },
+          "online": true,
+          "ota": {
+            "id": "867a4c0e6e721e57"
           }
         }
       }

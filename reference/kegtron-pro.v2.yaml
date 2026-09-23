@@ -96,8 +96,6 @@ paths:
                                   - offlineAlertEna
                                   - port0
                                   - port1
-                                  - port2
-                                  - port3
                                   - pressureAlertClearThresholdA
                                   - pressureAlertClearThresholdB
                                   - pressureAlertEmailEna
@@ -345,28 +343,15 @@ paths:
                                 required:
                                   - cleanActive
                                   - connectedWiFiSSID
-                                  - extAdcPresent
                                   - fwRev
                                   - humidity
-                                  - hwRev
                                   - macAddr
                                   - modelNum
-                                  - pcbRev
                                   - port0
                                   - port1
-                                  - port2
-                                  - port3
                                   - portCount
-                                  - presA
-                                  - presB
-                                  - pressureAPresent
-                                  - pressureBPresent
-                                  - priWiFiPass
-                                  - priWiFiSSID
                                   - serialNum
                                   - temp
-                                  - wifiMode
-                                  - wifiSuccess
                                 properties:
                                   cleanActive:
                                     type: integer
@@ -380,7 +365,7 @@ paths:
                                     description: External ADC present on interface PCBA
                                   fwRev:
                                     type: string
-                                    description: Firmware revision
+                                    description: 'Firmware revision (build date and time, YYYYMMDD-HHMMSS)'
                                   humidity:
                                     type: number
                                     description: Ambient relative humidity (%) from most recent reading
@@ -601,13 +586,16 @@ paths:
                                     description: |-
                                       WiFi success status: 1 - The device has successfully connected to the priWifiSSID or
                                       secWifiSSID network in STA mode at least once. 0 - After 5 consecutive unsuccessful attempts to connect to priWifiSSID or secWifiSSID, device will restart in APSTA mode
+                              config_factory:
+                                type: object
+                                description: Read-only factory tuning values (sample and report periods, sensor offsets). Returned only by devices on Kegtron's new cloud.
+                                additionalProperties: true
                               online:
                                 type: boolean
                                 description: Cloud connection status
                               ota:
                                 type: object
-                                required:
-                                  - id
+                                description: 'Over The Air (OTA) update info. An empty object {} for devices on Kegtron''s new cloud.'
                                 properties:
                                   id:
                                     type: string
@@ -756,7 +744,7 @@ paths:
                             cleanActive: 0
                             connectedWiFiSSID: Main WiFi
                             extAdcPresent: 1
-                            fwRev: '20200507'
+                            fwRev: '20260721-172002'
                             humidity: 66.5665
                             hwRev: 20200101
                             macAddr: 30AEA4426928
@@ -892,40 +880,6 @@ paths:
                               kegCost: 72.00
                               labelUrl: 0
                               srm: 3
-                            port2:
-                              abv: 0
-                              beaconEna: 0
-                              calOffset: 0
-                              drinkSize: 473
-                              ibu: 0
-                              maker: ''
-                              state: 0
-                              style: ''
-                              tapLabel: ''
-                              userDesc: ''
-                              userName: ''
-                              volSize: 58670
-                              distributor: ''
-                              kegCost: 0
-                              labelUrl: 0
-                              srm: 0
-                            port3:
-                              abv: 0
-                              beaconEna: 0
-                              calOffset: 0
-                              drinkSize: 473
-                              ibu: 0
-                              maker: ''
-                              state: 0
-                              style: ''
-                              tapLabel: ''
-                              userDesc: ''
-                              userName: ''
-                              volSize: 58670
-                              distributor: ''
-                              kegCost: 0
-                              labelUrl: 0
-                              srm: 0
                             pressureAlertClearThresholdA: 140
                             pressureAlertClearThresholdB: 140
                             pressureAlertEmailEna: 1
@@ -954,13 +908,10 @@ paths:
                           config_readonly:
                             cleanActive: 0
                             connectedWiFiSSID: Main WiFi
-                            extAdcPresent: 0
-                            fwRev: '20200507'
-                            humidity: 67.0665
-                            hwRev: 20200101
+                            fwRev: '20260922-215423'
+                            humidity: 67.07
                             macAddr: 30AEA4CB8768
                             modelNum: KT-220
-                            pcbRev: 1
                             port0:
                               dateCleaned: 2020/03/01
                               dateTapped: 2020/03/28
@@ -981,40 +932,16 @@ paths:
                               volDisp: 15287
                               volStart: 58670
                               offlineKegCount: 0
-                            port2:
-                              dateCleaned: ''
-                              dateTapped: ''
-                              kFactor: 472
-                              kegsServed: 0
-                              lastServing: 0
-                              pulseCnt: 0
-                              volDisp: 0
-                              volStart: 58670
-                              offlineKegCount: 0
-                            port3:
-                              dateCleaned: ''
-                              dateTapped: ''
-                              kFactor: 472
-                              kegsServed: 0
-                              lastServing: 0
-                              pulseCnt: 0
-                              volDisp: 0
-                              volStart: 58670
-                              offlineKegCount: 0
                             portCount: 2
-                            presA: 0
-                            presB: 0
-                            pressureAPresent: 0
-                            pressureBPresent: 0
-                            priWiFiPass: mainStreet
-                            priWiFiSSID: Main WiFi
-                            serialNum: '2001020345'
-                            temp: 8.93477
-                            wifiMode: 0
-                            wifiSuccess: 1
+                            serialNum: device3
+                            temp: 8.93
+                          config_factory:
+                            humidityOffset: 0
+                            reportPeriodMs: 900000
+                            tempOffset: 0
+                            tempSamplePeriodMs: 60000
                           online: true
-                          ota:
-                            id: 867a4c0e6e721e57
+                          ota: {}
       operationId: get-m-device
       security:
         - DEVICE_PUBLIC_KEY: []
@@ -1033,8 +960,8 @@ paths:
 
         NOTE:
         - Device ports are numbered 0,1,2,3 which correspond to user port numbers 1,2,3,4
-        - Four port objects will always be returned
-        - If shadow.state.reported.config.portCount < 4, the upper port objects can be ignored
+        - One port object is returned per port: port0–port3 on a KT-420, port0–port1 on a KT-220 (see config_readonly.portCount)
+        - Devices on Kegtron's new cloud (the KT-220 example) return an empty `ota` object, a `config_factory` object, `serialNum` equal to the device ID, and omit the WiFi, hardware-revision and pressure-sensor-present keys shown in the KT-420 example
     post:
       summary: Device POST
       tags:
@@ -1042,7 +969,18 @@ paths:
       operationId: post-m-device
       responses:
         '200':
-          description: OK
+          description: OK. The change is queued and applied when the device next checks in.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    status: ok
       security:
         - DEVICE_PUBLIC_KEY: []
       requestBody:
@@ -1322,9 +1260,9 @@ paths:
                   pubkeys:
                     type: object
                     description: >-
-                      Map of device IDs to DEVICE_PUBLIC_KEYs. Always use the
-                      map key (device ID) as the access_token — the value may
-                      be an empty object {}.
+                      Map keyed by the DEVICE_PUBLIC_KEY of each of the
+                      customer's devices. Use the map key as the access_token;
+                      each value is an empty object {}.
                     additionalProperties:
                       type: object
                   token:
@@ -1338,7 +1276,10 @@ paths:
                     description: mDash application id specific to Kegtron
                   id:
                     type: string
-                    description: CUSTOMER_KEY
+                    description: Customer ID (the `customer_id` column in data query results)
+                  cconfig:
+                    type: object
+                    description: Customer metadata set with Customer POST. Absent until set.
                 required:
                   - updated_at
                   - created_at
@@ -1350,7 +1291,7 @@ paths:
               examples:
                 'Example: Customer with two devices':
                   value:
-                    id: xXxXxXxXxXxXxXxXxXxXxXx
+                    id: Cx7ExampleCustomerId1
                     app_id: yYyYyYyYyYyYyYyYyYyYyYy
                     email: user@example.com
                     token: aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZz
@@ -1384,6 +1325,17 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    status: ok
       description: This endpoint allows modification of the Customer object metadata with account-specific info. All other keys within the Customer object are read-only.
       security:
         - CUSTOMER_KEY: []
@@ -1505,9 +1457,11 @@ paths:
             application/json:
               schema:
                 type: number
+                nullable: true
+                description: DC input voltage in volts, or `null` if the device does not answer in time.
               examples:
                 Example:
-                  value: 12.04
+                  value: 5.18386
       description: This remote procedure call (RPC) fetches the current DC input voltage of the keg monitor device. Useful for verifying power supply health.
       security:
         - DEVICE_PUBLIC_KEY: []
@@ -1527,7 +1481,19 @@ paths:
       operationId: post-api-v2-m-device-rpc-Kegtron.CleanMode
       responses:
         '200':
-          description: 'true'
+          description: >-
+            OK. Devices on Kegtron's new cloud return `{}` at once: the command
+            is queued and applied when the device next checks in. Devices not
+            yet moved to the new cloud return `true` once the device has
+            applied it.
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Queued:
+                  value: {}
+                Applied by device:
+                  value: true
       description: |-
         This remote procedure call (RPC) configures the Cleaning Mode for the device.
         - When enabled, measurements are ignored on all ports. Cleaning is enabled for a duration defined by config.cleaningDelay after which time it is automatically disabled.
@@ -1578,7 +1544,19 @@ paths:
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetVolume
       responses:
         '200':
-          description: 'true'
+          description: >-
+            OK. Devices on Kegtron's new cloud return `{}` at once: the command
+            is queued and applied when the device next checks in. Devices not
+            yet moved to the new cloud return `true` once the device has
+            applied it.
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Queued:
+                  value: {}
+                Applied by device:
+                  value: true
       description: |-
         This remote procedure call (RPC) initiates a keg volume reset on the target device for the specified port. 
 
@@ -1624,7 +1602,19 @@ paths:
       operationId: post-api-v2-m-device-rpc-Kegtron.ResetKegsServed
       responses:
         '200':
-          description: 'true'
+          description: >-
+            OK. Devices on Kegtron's new cloud return `{}` at once: the command
+            is queued and applied when the device next checks in. Devices not
+            yet moved to the new cloud return `true` once the device has
+            applied it.
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Queued:
+                  value: {}
+                Applied by device:
+                  value: true
       description: |
         This remote procedure call (RPC) initiates a reset of the kegs served counter on the target device for the specified port. 
 
@@ -1667,7 +1657,19 @@ paths:
       operationId: post-api-v2-m-device-rpc-Kegtron.UserOverride
       responses:
         '200':
-          description: 'true'
+          description: >-
+            OK. Devices on Kegtron's new cloud return `{}` at once: the command
+            is queued and applied when the device next checks in. Devices not
+            yet moved to the new cloud return `true` once the device has
+            applied it.
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Queued:
+                  value: {}
+                Applied by device:
+                  value: true
       description: |
         This remote procedure call (RPC) initiates user-initiated overrides of specific shadow values on the target device for the specified port. This method is used to prevent contention with firmware which can autonomously update these values.
 
@@ -1869,9 +1871,9 @@ paths:
                         - Moe's Tavern
                         - device2
                         - 0
-                        - 2
-                        - '{"name":"Keg level low"}'
-      description: 'Query alerts for one specific device port. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
+                        - 0
+                        - '{"name":"Low alert: 18.5%"}'
+      description: "Query alerts for one specific device port. Results are capped at 5,000 rows, newest first; narrow the time range to page through more. Devices on Kegtron's new cloud return no alert rows yet."
       parameters:
         - schema:
             type: string
@@ -1966,9 +1968,9 @@ paths:
                         - Moe's Tavern
                         - device2
                         - 1
-                        - 1
-                        - '{"name":"Temperature high"}'
-      description: 'Query alerts for all ports on one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
+                        - 9
+                        - '{"name":"High temperature alert event"}'
+      description: "Query alerts for all ports on one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more. Devices on Kegtron's new cloud return no alert rows yet."
       parameters:
         - schema:
             type: string
@@ -2445,7 +2447,19 @@ paths:
         - RPC
       responses:
         '200':
-          description: OK
+          description: >-
+            OK. Devices on Kegtron's new cloud return `{}` at once: the command
+            is queued and applied when the device next checks in. Devices not
+            yet moved to the new cloud return `true` once the device has
+            applied it.
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Queued:
+                  value: {}
+                Applied by device:
+                  value: true
       operationId: post-api-v2-m-device-rpc-Kegtron.ManServUpdate
       description: This remote procedure call (RPC) manually adds an entry to the 'servings' database table. Servings can be positive or negative values. A negative value may be used to 'undo' an existing serving that was recorded by mistake.
       security:
