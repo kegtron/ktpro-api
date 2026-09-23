@@ -26,9 +26,11 @@ docs/
 | `POST /api/v2/m/device` | Write device configuration |
 | `POST /api/v2/m/device/rpc/*` | Issue device commands (reset volume, clean mode, sensor reads, etc.) |
 | `POST /api/v2/m/device/data/*` | Query historical servings, alerts, and telemetry |
-| `wss://mdash.net/api/v2/m/device/notify` | Real-time device notifications |
+| `wss://pro-compat.api.kegtron.com/api/v2/m/device/notify` | Real-time device notifications |
 
-All endpoints are hosted at `https://mdash.net` and authenticated via an `access_token` query parameter.
+All endpoints are hosted at `https://pro-compat.api.kegtron.com` and authenticated via an `access_token` query parameter.
+
+> **Base URL change (September 2026):** use `https://pro-compat.api.kegtron.com`. Paths, tokens and response formats are unchanged. The old host `mdash.net` keeps working only for devices that have not yet moved to Kegtron's new cloud and will stop working for all devices; switch now.
 
 ## Editing
 

@@ -8,7 +8,7 @@ info:
     name: Kegtron
     url: kegtron.com
 servers:
-  - url: 'https://mdash.net'
+  - url: 'https://pro-compat.api.kegtron.com'
 tags:
   - name: Device
     description: Read and write device configuration via the device shadow
@@ -1736,30 +1736,42 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of telemetry records. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when data was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] temperature (number) - Ambient temperature in degrees C (or F if displayUnits=1)
-                      [5] humidity (number) - Relative humidity percentage
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the reading (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - device site name
+                      [3] device_id (string) - device identifier
+                      [4] temp (number) - ambient temperature, °C. Can be 0 when the device has no sensor fitted.
+                      [5] humidity (number) - relative humidity, %. Can be 0 when the device has no sensor fitted.
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - temp
+                      - humidity
                     rows:
-                      - - '2026-04-01T14:00:00Z'
-                        - '2026-04-01T07:00:00'
+                      - - '2026-04-01 07:00:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 4.2
                         - 68.5
-      description: 'Query telemetry for one specific device. '
+      description: 'Query telemetry for one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
       parameters:
         - schema:
             type: string
@@ -1811,32 +1823,45 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of alert records. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when alert was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] port_number (integer) - Port number (0-indexed)
-                      [5] alert_type (integer) - Alert type code
-                      [6] alert_message (string) - JSON-encoded object; parse to access the .name field containing the alert description
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the alert (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - device site name
+                      [3] device_id (string) - device identifier
+                      [4] port_num (integer) - port number, 0-indexed
+                      [5] type (integer) - alert type code
+                      [6] message (string) - JSON-encoded string, e.g. "{\"name\":\"Keg volume auto reset\"}"
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - port_num
+                      - type
+                      - message
                     rows:
-                      - - '2026-04-01T14:00:00Z'
-                        - '2026-04-01T07:00:00'
+                      - - '2026-04-01 07:00:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 0
                         - 2
                         - '{"name":"Keg level low"}'
-      description: 'Query alerts for one specific device port. '
+      description: 'Query alerts for one specific device port. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
       parameters:
         - schema:
             type: string
@@ -1890,32 +1915,45 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of alert records for all ports on the device. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when alert was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] port_number (integer) - Port number (0-indexed)
-                      [5] alert_type (integer) - Alert type code
-                      [6] alert_message (string) - JSON-encoded object; parse to access the .name field containing the alert description
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the alert (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - device site name
+                      [3] device_id (string) - device identifier
+                      [4] port_num (integer) - port number, 0-indexed
+                      [5] type (integer) - alert type code
+                      [6] message (string) - JSON-encoded string, e.g. "{\"name\":\"Keg volume auto reset\"}"
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - port_num
+                      - type
+                      - message
                     rows:
-                      - - '2026-04-01T14:00:00Z'
-                        - '2026-04-01T07:00:00'
+                      - - '2026-04-01 07:00:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 1
                         - 1
                         - '{"name":"Temperature high"}'
-      description: 'Query alerts for all ports on one specific device. '
+      description: 'Query alerts for all ports on one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
       parameters:
         - schema:
             type: string
@@ -1967,29 +2005,45 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of serving records for the specified port. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] port_number (integer) - Port number (0-indexed)
-                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
-                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
-                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
-                      [8] keg_name (string) - Beverage name (userName) at time of serving
-                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - site name (device siteName)
+                      [3] device_id (string) - device identifier
+                      [4] port_num (integer) - port number, 0-indexed
+                      [5] vol (integer) - serving volume, mL
+                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
+                      [7] level (number) - keg level after the serving, percent
+                      [8] keg_name (string) - beverage name (userName) at time of serving
+                      [9] duration (integer) - serving duration, ms
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - port_num
+                      - vol
+                      - disp
+                      - level
+                      - keg_name
+                      - duration
                     rows:
-                      - - '2026-04-01T21:05:00Z'
-                        - '2026-04-01T14:05:00'
+                      - - '2026-04-01 14:05:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 0
@@ -1998,7 +2052,7 @@ paths:
                         - 88.6
                         - King Cobra
                         - 8200
-      description: 'Query servings for one specific device port. '
+      description: 'Query servings for one specific device port. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
       parameters:
         - schema:
             type: string
@@ -2053,29 +2107,45 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of serving records for all ports on the device. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] port_number (integer) - Port number (0-indexed)
-                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
-                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
-                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
-                      [8] keg_name (string) - Beverage name (userName) at time of serving
-                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - site name (device siteName)
+                      [3] device_id (string) - device identifier
+                      [4] port_num (integer) - port number, 0-indexed
+                      [5] vol (integer) - serving volume, mL
+                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
+                      [7] level (number) - keg level after the serving, percent
+                      [8] keg_name (string) - beverage name (userName) at time of serving
+                      [9] duration (integer) - serving duration, ms
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - port_num
+                      - vol
+                      - disp
+                      - level
+                      - keg_name
+                      - duration
                     rows:
-                      - - '2026-04-01T21:05:00Z'
-                        - '2026-04-01T14:05:00'
+                      - - '2026-04-01 14:05:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 0
@@ -2084,7 +2154,7 @@ paths:
                         - 88.6
                         - King Cobra
                         - 8200
-      description: 'Query servings for all ports on one specific device. '
+      description: 'Query servings for all ports on one specific device. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.'
       parameters:
         - schema:
             type: string
@@ -2136,29 +2206,45 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of serving records for all ports and devices at the specified site. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] port_number (integer) - Port number (0-indexed)
-                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
-                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
-                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
-                      [8] keg_name (string) - Beverage name (userName) at time of serving
-                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - site name (device siteName)
+                      [3] device_id (string) - device identifier
+                      [4] port_num (integer) - port number, 0-indexed
+                      [5] vol (integer) - serving volume, mL
+                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
+                      [7] level (number) - keg level after the serving, percent
+                      [8] keg_name (string) - beverage name (userName) at time of serving
+                      [9] duration (integer) - serving duration, ms
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - port_num
+                      - vol
+                      - disp
+                      - level
+                      - keg_name
+                      - duration
                     rows:
-                      - - '2026-04-01T21:05:00Z'
-                        - '2026-04-01T14:05:00'
+                      - - '2026-04-01 14:05:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 0
@@ -2168,7 +2254,7 @@ paths:
                         - King Cobra
                         - 8200
       description: |-
-        Query servings for all ports and all devices for a specific site.
+        Query servings for all ports and all devices for a specific site. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.
 
         **NOTE:**
         The access_token can be any DEVICE_PUBLIC_KEY (pubkey) from any device associated with the target site.
@@ -2226,29 +2312,45 @@ paths:
               schema:
                 type: object
                 properties:
+                  names:
+                    type: array
+                    description: Column names for each entry in `rows`, in order.
+                    items:
+                      type: string
                   rows:
                     type: array
                     description: |-
                       Array of serving records for all ports, devices and sites associated with the customer. Each row is an ordered array with the following columns:
-                      [0] cloud_timestamp (string, UTC ISO 8601) - Timestamp when serving was received by cloud
-                      [1] device_timestamp (string, UTC ISO 8601) - Timestamp recorded by device
-                      [2] site_name (string) - Device site name
-                      [3] device_id (string) - Device identifier
-                      [4] port_number (integer) - Port number (0-indexed)
-                      [5] serving_volume_ml (integer) - Volume dispensed in this serving (mL)
-                      [6] total_volume_dispensed_ml (integer) - Total volume dispensed from keg since last reset (mL)
-                      [7] keg_level_percent (number) - Keg fill level after this serving (0-100)
-                      [8] keg_name (string) - Beverage name (userName) at time of serving
-                      [9] serving_duration_ms (integer) - Duration of serving (ms)
+                      [0] timestamp (string, UTC, "YYYY-MM-DD HH:MM:SS") - time of the serving (device clock when synced, otherwise cloud receipt time)
+                      [1] customer_id (string) - account identifier
+                      [2] site_id (string) - site name (device siteName)
+                      [3] device_id (string) - device identifier
+                      [4] port_num (integer) - port number, 0-indexed
+                      [5] vol (integer) - serving volume, mL
+                      [6] disp (integer) - total volume dispensed from the keg since last reset, mL
+                      [7] level (number) - keg level after the serving, percent
+                      [8] keg_name (string) - beverage name (userName) at time of serving
+                      [9] duration (integer) - serving duration, ms
                     items:
                       type: array
                       items: {}
               examples:
                 Example:
                   value:
+                    names:
+                      - timestamp
+                      - customer_id
+                      - site_id
+                      - device_id
+                      - port_num
+                      - vol
+                      - disp
+                      - level
+                      - keg_name
+                      - duration
                     rows:
-                      - - '2026-04-01T21:05:00Z'
-                        - '2026-04-01T14:05:00'
+                      - - '2026-04-01 14:05:00'
+                        - Cx7ExampleCustomerId1
                         - Moe's Tavern
                         - device2
                         - 0
@@ -2258,7 +2360,7 @@ paths:
                         - King Cobra
                         - 8200
       description: |-
-        Query servings for all ports, devices and sites associated with a customer.
+        Query servings for all ports, devices and sites associated with a customer. Results are capped at 5,000 rows, newest first; narrow the time range to page through more.
 
         **NOTE:**
         The access_token can be any DEVICE_PUBLIC_KEY (pubkey) from any device associated with the target customer.

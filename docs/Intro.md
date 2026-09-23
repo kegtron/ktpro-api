@@ -1,6 +1,8 @@
 # Introduction
 
-Kegtron Pro uses a REST API to interact with keg monitor hardware ("devices"). All endpoints are hosted at `https://mdash.net`.
+Kegtron Pro uses a REST API to interact with keg monitor hardware ("devices"). All endpoints are hosted at `https://pro-compat.api.kegtron.com`.
+
+> **Base URL change (September 2026):** use `https://pro-compat.api.kegtron.com`. Paths, tokens and response formats are unchanged. The old host `mdash.net` keeps working only for devices that have not yet moved to Kegtron's new cloud and will stop working for all devices; switch now.
 
 ## Authentication
 
@@ -41,7 +43,7 @@ Configuration keys are split into two groups:
 Use the WebSocket endpoint to receive live push notifications instead of polling:
 
 ```
-wss://mdash.net/api/v2/m/device/notify?access_token=<DEVICE_PUBLIC_KEY>
+wss://pro-compat.api.kegtron.com/api/v2/m/device/notify?access_token=<DEVICE_PUBLIC_KEY>
 ```
 
 See the **Notifications** page for message format details and a Node.js example.

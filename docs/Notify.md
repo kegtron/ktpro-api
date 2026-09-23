@@ -5,7 +5,7 @@ Instead of polling the Device GET endpoint, you can open a WebSocket connection 
 ## Endpoint
 
 ```
-wss://mdash.net/api/v2/m/device/notify?access_token=<DEVICE_PUBLIC_KEY>
+wss://pro-compat.api.kegtron.com/api/v2/m/device/notify?access_token=<DEVICE_PUBLIC_KEY>
 ```
 
 One connection covers one device. To monitor multiple devices, open one connection per DEVICE_PUBLIC_KEY.
@@ -75,7 +75,7 @@ See the **Device GET** endpoint for full field definitions.
 const WebSocket = require('ws');  // npm install ws
 
 const pubkey = '<DEVICE_PUBLIC_KEY>';
-const url = `wss://mdash.net/api/v2/m/device/notify?access_token=${pubkey}`;
+const url = `wss://pro-compat.api.kegtron.com/api/v2/m/device/notify?access_token=${pubkey}`;
 const ws = new WebSocket(url, { origin: url });
 
 ws.on('open', () => console.log('Connected'));
@@ -100,7 +100,7 @@ ws.on('error', (err) => console.error('WebSocket error:', err.message));
 
 ```js
 const pubkey = '<DEVICE_PUBLIC_KEY>';
-const url = `wss://mdash.net/api/v2/m/device/notify?access_token=${pubkey}`;
+const url = `wss://pro-compat.api.kegtron.com/api/v2/m/device/notify?access_token=${pubkey}`;
 const ws = new WebSocket(url);
 
 ws.addEventListener('message', (event) => {
